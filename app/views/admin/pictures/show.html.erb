@@ -1,0 +1,31 @@
+<h2>Showing Picture: <%= @picture.title %></h2>
+<p class="show">
+	<% if !@picture.image_path.blank? %>
+		<%= image_tag(image_path(@picture.image_path), :border => 0, :alt => @picture.alt_text, :class => "show_picture_image") %>
+	<% end %>
+</p>
+<h5>Title: <%= @picture.title %></h5>
+<h5>Caption: <%= @picture.caption %></h5>
+<h5>Alt Text: <%= @picture.alt_text %></h5>
+<h5>Thumbnail Size: <%= @picture.max_thumbnail_width %>x<%= @picture.max_thumbnail_height %></h5>
+<h5>SHA2 Checksum: <%= @picture.sha2_checksum %></h5>
+<h5>
+	Attached to:
+	<% if @picture.attachable %>
+		<%= @picture.attachable.class %> - <%= @picture.attachable.id %>
+		<% if @picture.attachable.class == Page %>
+			<%= @picture.attachable.title %>
+		<% end %>
+		<% if @picture.attachable.class == Listing %>
+			<%= @picture.attachable.street_address %>
+		<% end %>
+	<% else %>
+		---
+	<% end %>
+</h5>
+<h5>Created at: <%= @picture.created_at.strftime("%Y-%m-%d %H:%M:%S") %></h5>
+<h5>Last Updated at: <%= @picture.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></h5>
+<p class="show">
+	<%= link_to("Edit Picture", edit_admin_picture_path(@picture)) %> |
+	<%= link_to("Delete Picture", admin_picture_path(@picture), :method => :delete, :confirm => "Are you sure you want to delete this picture? This action cannot be undone!") %>
+</p>

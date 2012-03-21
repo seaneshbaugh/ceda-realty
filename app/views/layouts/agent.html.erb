@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>
+		Ceda Realty<% if !@page_title.blank? %> - <%= @page_title %><% end %>
+	</title>
+	<meta name="description" content="<% if !@meta_description.blank? %><%= @meta_description %><% else %>Ceda Realty, reinventing the real estate experience!<% end %>">
+	<meta name="author" content="Ceda Realty">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%= stylesheet_link_tag "reset.css" %>
+	<%= stylesheet_link_tag "960.css" %>
+	<%= stylesheet_link_tag "agent.css" %>
+	<%= javascript_include_tag "jquery-1.3.2.min.js" %>
+	<%= javascript_include_tag "jquery.tipsy.js" %>
+	<%= javascript_include_tag "agent.js" %>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+</head>
+<body>
+	<header>
+		<div id="head_wrap" class="container_12">
+			<div id="logo" class="grid_4">
+				<h1><%= link_to("CEDA Realty", root_path) %><br /><span>Mobile Office</span></h1>
+			</div>
+			<div id="controlpanel" class="grid_8">
+				<ul>
+					<li><p>Signed in as <strong><%= @user.first_name + " " + @user.last_name %></strong></p></li>
+					<li><%= link_to("Settings", edit_agent_person_path(@user)) %></li>
+					<li><%= link_to("Sign Out", @application_session, :method => :delete, :title => "Sign Out", :class => "last") %></li>
+				</ul>
+			</div>
+			<div id="navigation" class=" grid_12">
+				<ul>
+					<li><%= link_to("Home", agent_root_path, :title => "Panel Home", :id => "agent_menu") %></li>
+					<% if @user.agent %>
+						<li><%= link_to("Your Profile", edit_agent_agent_path(@user.agent), :title => "Your Agent Profile", :id => "agents_menu") %></li>
+					<% end %>
+					<li><%= link_to("Pictures", agent_pictures_path, :title => "Pictures", :id => "pictures_menu") %></li>
+					<li><%= link_to("Agent Resources", agent_agent_resources_path, :title => "Agent Resources", :id => "agent_resources_menu") %></li>
+					<li><a href="javascript:alert('Coming Soon!');">Message Board</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<div id="sub_nav">
+		<div id="subnav_wrap" class="container_12">
+			<div id="subnav" class=" grid_12">
+				<% case controller.controller_name
+					when "people" %>
+					<% when "pages" %>
+					<% when "agents" %>
+					<% when "listings" %>
+					<% when "pictures" %>
+						<ul>
+							<li><%= link_to("View All", agent_pictures_path, :title => "View All Pictures", :id => "pictures_index_menu_item") %></li>
+							<li><%= link_to("New Picture", new_agent_picture_path, :title => "New Picture", :id => "pictures_new_menu_item") %></li>
+						</ul>
+					<% when "agent_resources" %>
+						<ul>
+							<li><%= link_to("View All", agent_agent_resources_path, :title => "View All Agent Resources", :id => "agent_resources_index_menu_item") %></li>
+						</ul>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<% if flash[:notice] %>
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="flash_notice" class="notification <%= flash[:type] %> click_to_close">
+					<p><%= flash[:notice] %></p>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<% if flash[:debug] %>
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="flash_debug" class="notification information click_to_close">
+					<div><%= debug flash[:debug] %></div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<div id="main_content_wrap" class="container_12">
+		<%= yield %>
+	</div>
+	<div class="clearfix">&nbsp;</div>
+	<div class="container_12">
+		<footer class="grid_12">
+			<p>&copy; Content Copyright <%= Time.now.year %> Ceda Realty | Created with <a href="http://rubyonrails.org/">Ruby on Rails</a> by <a href="http://seaneshbaugh.com/">Sean Eshbaugh</a>
+		</footer>
+	</div>
+	<div id="controller_name" class="<%= controller.controller_name %>"></div>
+	<div id="action_name" class="<%= controller.controller_name %>_<%= controller.action_name %>"></div>
+</body>
+</html>

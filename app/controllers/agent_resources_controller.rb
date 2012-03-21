@@ -1,0 +1,2 @@
+class AgentResourcesController < ApplicationController
+end

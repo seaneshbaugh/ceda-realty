@@ -1,0 +1,99 @@
+<div class="container_12">
+	<% if !params[:category].blank? %>
+		<h2><%= params[:category] %></h2>
+	<% else %>
+		<h2>Agent Resources</h2>
+	<% end %>
+	<div class="clearfix">&nbsp;</div>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tbody>
+			<tr class="even">
+				<th scope="col">
+					<% if params[:sort] == "id" and params[:order] == "ASC" %>
+						<%= link_to("ID", agent_agent_resources_path(:order => "DESC", :sort => :id, :category => params[:category])) %>
+					<% else %>
+						<%= link_to("ID", agent_agent_resources_path(:order => "ASC", :sort => :id, :category => params[:category])) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					<% if params[:sort] == "name" and params[:order] == "ASC" %>
+						<%= link_to("Name", agent_agent_resources_path(:order => "DESC", :sort => :name, :category => params[:category])) %>
+					<% else %>
+						<%= link_to("Name", agent_agent_resources_path(:order => "ASC", :sort => :name, :category => params[:category])) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					<% if params[:sort] == "category" and params[:order] == "ASC" %>
+						<%= link_to("Category", agent_agent_resources_path(:order => "DESC", :sort => :category, :category => params[:category])) %>
+					<% else %>
+						<%= link_to("Category", agent_agent_resources_path(:order => "ASC", :sort => :category, :category => params[:category])) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					<% if params[:sort] == "description" and params[:order] == "ASC" %>
+						<%= link_to("Description", agent_agent_resources_path(:order => "DESC", :sort => :description, :category => params[:category])) %>
+					<% else %>
+						<%= link_to("Description", agent_agent_resources_path(:order => "ASC", :sort => :description, :category => params[:category])) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					<% if params[:sort] == "person_id" and params[:order] == "ASC" %>
+						<%= link_to("Uploaded By", admin_agent_resources_path(:order => "DESC", :sort => :person_id)) %>
+					<% else %>
+						<%= link_to("Uploaded By", admin_agent_resources_path(:order => "ASC", :sort => :person_id)) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					<% if params[:sort] == "created_at" and params[:order] == "ASC" %>
+						<%= link_to("Created At", agent_agent_resources_path(:order => "DESC", :sort => :created_at, :category => params[:category])) %>
+					<% else %>
+						<%= link_to("Created At", agent_agent_resources_path(:order => "ASC", :sort => :created_at, :category => params[:category])) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					<% if params[:sort] == "updated_at" and params[:order] == "ASC" %>
+						<%= link_to("Updated At", agent_agent_resources_path(:order => "DESC", :sort => :updated_at, :category => params[:category])) %>
+					<% else %>
+						<%= link_to("Updated At", agent_agent_resources_path(:order => "ASC", :sort => :updated_at, :category => params[:category])) %>
+					<% end %>
+				</th>
+				<th scope="col">
+					Download
+				</th>
+			</tr>
+			<% even_row = false %>
+			<% for agent_resource in @agent_resources %>
+				<%if even_row %><tr class="even"><% else %><tr><% end %><% even_row = !even_row %>
+					<td scope="col"><%= link_to(agent_resource.id, agent_agent_resource_path(agent_resource)) %></td>
+					<td scope="col"><%= link_to(agent_resource.name, agent_agent_resource_path(agent_resource)) %></td>
+					<td scope="col"><%= link_to(agent_resource.category, agent_agent_resources_path(:category => agent_resource.category)) %></td>
+					<td scope="col"><%= truncate(agent_resource.description, 64) %></td>
+					<td scope="col">
+						<% if !agent_resource.person_id.nil? and !agent_resource.person.nil? %>
+							<%= link_to(agent_resource.person.first_name + " " + agent_resource.person.last_name, admin_person_path(agent_resource.person)) %>
+						<% else %>
+							Unknown
+						<% end %>
+					</td>
+					<td scope="col"><%= agent_resource.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+					<td scope="col"><%= agent_resource.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+					<td scope="col" style="text-align: center;">
+						<% if !agent_resource.resource_filename.blank? %>
+							<%= link_to(image_tag(image_path("icons/16x16/attachment.png")), get_file_agent_agent_resource_path(agent_resource)) %>
+						<% end %>
+						<% if !agent_resource.external_url.blank? %>
+							<%= link_to("Visit", agent_resource.external_url) %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<div class="grid_12">
+		<div class="clearfix">&nbsp;</div>
+		<div id="pagination">
+			<%= will_paginate @agent_resources %>
+		</div>
+	</div>
+	<div class="clearfix">&nbsp;</div>
+</div>

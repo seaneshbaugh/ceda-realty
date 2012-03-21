@@ -1,0 +1,788 @@
+<style type="text/css">
+#IDX-quickSearchForm {
+	color: #ffffff;
+	height: 333px;
+	width: 240px;
+}
+
+#QS-header {
+	background: #41394a;
+	height: 28px;
+	padding-top: 15px;
+	text-align: center;
+	width: 100%;
+}
+
+#QS-body {
+	background: #51485a;
+    background: -moz-linear-gradient(top, #51485a, #121212);
+    background: -webkit-gradient(linear, left top, left bottom, from(#51485a), to(#121212));
+    filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#51485a', EndColorStr='#121212', GradientType=0);
+    margin-bottom: 6px;
+    padding-top: 17px;
+    height: 267px;
+    overflow: hidden;
+}
+
+.QS-input {
+	width: 238px;
+	height: 21px;
+	margin-bottom: 14px;
+	margin-right: 15px;
+}
+
+
+.QS-textInput {
+	height: 21px;
+	width: 106px;
+}
+
+.QS-input label {
+	float: left;
+	margin-right: 18px;
+	padding-top: 3px;
+	text-align: right;
+	width: 78px;
+}
+
+.QS-input input {
+	float: left;
+}
+
+#QS-minPriceField, #QS-maxPriceField {
+	height: 15px;
+	width: 112px;
+}
+
+#QS-minSqftField {
+	height: 15px;
+	width: 84px;
+}
+
+#QS-minRoomsField, #QS-minBathsField {
+	height: 15px;
+	width: 33px;
+}
+
+.QS-dropDown {
+	height: 21px;
+	width: 112px;
+}
+
+#QS-buttonSearch {
+	background: #ff4423 url("../images/search-button-background.png") no-repeat;
+	border: 0;
+	color: #ffffff;
+	font-family: "Futura Medium", "Trebuchet MS", Verdana, sans-serif;
+	font-size: 17px;
+	height: 48px;
+	margin-top: 4px;
+	width: 230px;
+}
+
+#advanced_search {
+	background: #292633;
+	font-family: "Futura Medium", "Trebuchet MS", Verdana, sans-serif;
+	color: #ffffff;
+	height: 41px;
+	overflow: hidden;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	padding-left: 5px;
+	padding-top: 5px;
+	width: 235px;
+}
+
+#advanced_search a {
+	color: #ffffff;
+	font-size: 14px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+#advanced_search img {
+	vertical-align: middle;
+}
+
+</style>
+<div id="IDX-quickSearchForm">
+	<div id="QS-header">
+		<%= image_tag(image_path("mls-quick-search.png")) %>
+	</div>
+	<div id="QS-body">
+		<% form_tag search_mls_listings_path, :id => "search_mls_form" do %>
+			<div class="QS-input">
+				<label for="QS-minPriceField">Min Price</label>
+				<input type="text" name="lp" id="QS-minPriceField" value="" class="QS-textInput">
+			</div>
+			<div class="QS-input">
+				<label for="QS-maxPriceField">Max Price</label>
+				<input type="text" name="hp" id="QS-maxPriceField" value="" class="QS-textInput">
+			</div>
+			<div class="QS-input">
+				<label for="QS-minSqftField">Min SQFT</label>
+				<input type="text" name="sqFt" id="QS-minSqftField" value="" class="QS-textInput">
+			</div>
+			<div class="QS-input">
+				<label for="QS-minRoomsField">Min Beds</label>
+				<input type="text" name="bd" id="QS-minRoomsField" value="" class="QS-textInput">
+			</div>
+			<div class="QS-input">
+				<label for="QS-minBathsField">Min Baths</label>
+				<input type="text" name="ba" id="QS-minBathsField" value="" class="QS-textInput">
+			</div>
+			<div class="QS-input">
+				<label for="QS-selectCityList">City</label>
+				<select id="QS-selectCityList" name="city[]" class="QS-dropDown">
+					<option selected value="">Choose a city</option>
+					<option value="96">Abbott</option>
+					<option value="123">Abilene</option>
+					<option value="259">Addison</option>
+					<option value="450">Alba</option>
+					<option value="468">Albany</option>
+					<option value="555">Aledo</option>
+					<option value="673">Allen</option>
+					<option value="993">Alvarado</option>
+					<option value="1004">Alvord</option>
+					<option value="1027">Amarillo</option>
+					<option value="1082">Ames</option>
+					<option value="1225">Andrews</option>
+					<option value="1269">Anna</option>
+					<option value="1302">Anson</option>
+					<option value="1412">Aquilla</option>
+					<option value="1480">Archer City</option>
+					<option value="1551">Argyle</option>
+					<option value="1608">Arlington</option>
+					<option value="1679">Arp</option>
+					<option value="1724">Arthur City</option>
+					<option value="1854">Aspermont</option>
+					<option value="1901">Athens</option>
+					<option value="1957">Atlas</option>
+					<option value="1964">Atoka</option>
+					<option value="2006">Aubrey</option>
+					<option value="2096">Aurora</option>
+					<option value="2115">Austin</option>
+					<option value="2141">Avalon</option>
+					<option value="2161">Avery</option>
+					<option value="2166">Avinger</option>
+					<option value="2245">Azle</option>
+					<option value="2301">Bagwell</option>
+					<option value="2311">Bailey</option>
+					<option value="2336">Baird</option>
+					<option value="2384">Balch Springs</option>
+					<option value="2440">Ballinger</option>
+					<option value="2497">Bangs</option>
+					<option value="2559">Bardwell</option>
+					<option value="2693">Barry</option>
+					<option value="2740">Bartonville</option>
+					<option value="2791">Bastrop</option>
+					<option value="3133">Beaumont</option>
+					<option value="3222">Bedford</option>
+					<option value="3340">Belgrade</option>
+					<option value="3451">Bellevue</option>
+					<option value="3474">Bells</option>
+					<option value="3536">Belton</option>
+					<option value="3573">Ben Franklin</option>
+					<option value="3578">Ben Wheeler</option>
+					<option value="3582">Benbrook</option>
+					<option value="3803">Berryville</option>
+					<option value="4052">Big Sandy</option>
+					<option value="4300">Blacksburg</option>
+					<option value="4317">Blackwell</option>
+					<option value="4405">Blanket</option>
+					<option value="4453">Bloomburg</option>
+					<option value="4479">Blooming Grove</option>
+					<option value="4521">Blossom</option>
+					<option value="4570">Blue Mound</option>
+					<option value="4583">Blue Ridge</option>
+					<option value="4618">Bluff Dale</option>
+					<option value="4640">Blum</option>
+					<option value="4810">Bogata</option>
+					<option value="4924">Bonham</option>
+					<option value="5150">Bowie</option>
+					<option value="5203">Boyd</option>
+					<option value="5252">Brackettville</option>
+					<option value="5307">Bradshaw</option>
+					<option value="5407">Brashear</option>
+					<option value="5444">Breckenridge</option>
+					<option value="5566">Bridgeport</option>
+					<option value="5767">Brock</option>
+					<option value="5798">Broken Bow</option>
+					<option value="5828">Brookesmith</option>
+					<option value="5908">Brookston</option>
+					<option value="5975">Brownsboro</option>
+					<option value="6014">Brownwood</option>
+					<option value="6121">Bryson</option>
+					<option value="6249">Buffalo</option>
+					<option value="6257">Buffalo Gap</option>
+					<option value="6275">Buford</option>
+					<option value="6292">Bullard</option>
+					<option value="6374">Burkett</option>
+					<option value="6386">Burleson</option>
+					<option value="6424">Burnet</option>
+					<option value="6433">Burneyville</option>
+					<option value="6619">Bynum</option>
+					<option value="6673">Caddo</option>
+					<option value="6675">Caddo Mills</option>
+					<option value="6740">Caldwell</option>
+					<option value="6755">Calera</option>
+					<option value="6813">Callisburg</option>
+					<option value="6994">Campbell</option>
+					<option value="7141">Canton</option>
+					<option value="7155">Canyon</option>
+					<option value="7241">Carbon</option>
+					<option value="7262">Cardale</option>
+					<option value="7339">Carlton</option>
+					<option value="7450">Carrollton</option>
+					<option value="7514">Cartwright</option>
+					<option value="7658">Castroville</option>
+					<option value="7746">Cayuga</option>
+					<option value="7813">Cedar Hill</option>
+					<option value="7827">Cedar Park</option>
+					<option value="7889">Celeste</option>
+					<option value="7895">Celina</option>
+					<option value="7999">Centerville</option>
+					<option value="8170">Chandler</option>
+					<option value="8308">Chatfield</option>
+					<option value="8589">Chico</option>
+					<option value="8813">Cisco</option>
+					<option value="8899">Clarendon</option>
+					<option value="8990">Clarksville</option>
+					<option value="9091">Clear Lake Shores</option>
+					<option value="9129">Cleburne</option>
+					<option value="9184">Cleveland</option>
+					<option value="9234">Clifton</option>
+					<option value="9381">Clyde</option>
+					<option value="9488">Cockrell Hill</option>
+					<option value="9553">Colbert</option>
+					<option value="9572">Cold Spring</option>
+					<option value="9587">Coldspring</option>
+					<option value="9607">Coleman</option>
+					<option value="9708">Colleyville</option>
+					<option value="9739">Collinsville</option>
+					<option value="9879">Comanche</option>
+					<option value="9881">Combine</option>
+					<option value="9906">Commerce</option>
+					<option value="9921">Como</option>
+					<option value="9967">Concan</option>
+					<option value="10158">Coolidge</option>
+					<option value="10170">Cooper</option>
+					<option value="10216">Copeville</option>
+					<option value="10222">Coppell</option>
+					<option value="10223">Copper Canyon</option>
+					<option value="10267">Cordell</option>
+					<option value="10299">Corinth</option>
+					<option value="10374">Corpus Christi</option>
+					<option value="10386">Corrigan</option>
+					<option value="10394">Corsicana</option>
+					<option value="10599">Covington</option>
+					<option value="10705">Crandall</option>
+					<option value="10722">Cranfills Gap</option>
+					<option value="10745">Crawford</option>
+					<option value="10763">Crecy</option>
+					<option value="10811">Cresson</option>
+					<option value="10816">Crested Butte</option>
+					<option value="10887">Crockett</option>
+					<option value="10951">Cross Plains</option>
+					<option value="10956">Cross Roads</option>
+					<option value="10968">Crossroads</option>
+					<option value="10975">Crossville</option>
+					<option value="11004">Crowley</option>
+					<option value="11057">Crystal Beach</option>
+					<option value="11154">Cumby</option>
+					<option value="11294">Cypress Mill</option>
+					<option value="11335">Daingerfield</option>
+					<option value="11343">Daisy</option>
+					<option value="11384">Dallas</option>
+					<option value="11634">Dawson</option>
+					<option value="11669">Dayton</option>
+					<option value="11691">De Kalb</option>
+					<option value="11695">De Leon</option>
+					<option value="11759">Decatur</option>
+					<option value="11892">Del Rio</option>
+					<option value="12032">Denison</option>
+					<option value="12078">Denton</option>
+					<option value="12102">Deport</option>
+					<option value="12148">Desdemona</option>
+					<option value="12163">Desoto</option>
+					<option value="12175">Detroit</option>
+					<option value="12182">Devers</option>
+					<option value="12271">Diana</option>
+					<option value="12312">Dike</option>
+					<option value="12433">Dodd City</option>
+					<option value="12513">Donie</option>
+					<option value="12556">Dorchester</option>
+					<option value="12604">Double Oak</option>
+					<option value="12853">Dublin</option>
+					<option value="12897">Duffau</option>
+					<option value="12960">Duncanville</option>
+					<option value="13229">Early</option>
+					<option value="13685">Eastland</option>
+					<option value="13807">Ector</option>
+					<option value="13905">Edgewood</option>
+					<option value="13963">Edom</option>
+					<option value="14286">Elkhart</option>
+					<option value="14438">Elm Mott</option>
+					<option value="14555">Elwood</option>
+					<option value="14642">Emory</option>
+					<option value="14666">Enchanted Oaks</option>
+					<option value="14687">Energy</option>
+					<option value="14740">Ennis</option>
+					<option value="14818">Era</option>
+					<option value="15049">Eula</option>
+					<option value="15052">Euless</option>
+					<option value="15082">Eustace</option>
+					<option value="15159">Everman</option>
+					<option value="15432">Fairfield</option>
+					<option value="15522">Fairview</option>
+					<option value="15663">Farmers Branch</option>
+					<option value="15675">Farmersville</option>
+					<option value="15745">Fate</option>
+					<option value="15906">Ferris</option>
+					<option value="16172">Flint</option>
+					<option value="16182">Flippin</option>
+					<option value="16257">Flower Mound</option>
+					<option value="16270">Floyd</option>
+					<option value="53569">Foreign Country</option>
+					<option value="16393">Forest Hill</option>
+					<option value="16422">Forestburg</option>
+					<option value="16462">Forney</option>
+					<option value="16467">Forreston</option>
+					<option value="16506">Fort Davis</option>
+					<option value="16683">Fort Worth</option>
+					<option value="16924">Frankston</option>
+					<option value="16963">Fredericksburg</option>
+					<option value="17037">Freeport</option>
+					<option value="17143">Frisco</option>
+					<option value="17171">Frost</option>
+					<option value="17200">Fruitvale</option>
+					<option value="17308">Gainesville</option>
+					<option value="17392">Galveston</option>
+					<option value="17476">Garden Valley</option>
+					<option value="17525">Garland</option>
+					<option value="17573">Garvin</option>
+					<option value="17621">Gatesville</option>
+					<option value="17872">Gilbert</option>
+					<option value="17941">Gilmer</option>
+					<option value="17986">Gladewater</option>
+					<option value="18100">Glen Rose</option>
+					<option value="18187">Glenn Heights</option>
+					<option value="18287">Gober</option>
+					<option value="18298">Godley</option>
+					<option value="18335">Golden</option>
+					<option value="18488">Gordon</option>
+					<option value="18500">Gordonville</option>
+					<option value="18516">Gorman</option>
+					<option value="18601">Graford</option>
+					<option value="18622">Graham</option>
+					<option value="18638">Granbury</option>
+					<option value="18696">Grand Prairie</option>
+					<option value="18708">Grand Saline</option>
+					<option value="18731">Grandview</option>
+					<option value="18843">Grapevine</option>
+					<option value="19186">Greenville</option>
+					<option value="19332">Groesbeck</option>
+					<option value="19401">Groveton</option>
+					<option value="19505">Gun Barrel City</option>
+					<option value="19514">Gunter</option>
+					<option value="19533">Gustine</option>
+					<option value="19772">Haltom City</option>
+					<option value="19824">Hamilton</option>
+					<option value="19847">Hamlin</option>
+					<option value="20100">Harker Heights</option>
+					<option value="20378">Haskell</option>
+					<option value="20384">Haslet</option>
+					<option value="20389">Hasse</option>
+					<option value="20503">Hawkins</option>
+					<option value="20512">Hawley</option>
+					<option value="20664">Heath</option>
+					<option value="20824">Henderson</option>
+					<option value="20861">Henrietta</option>
+					<option value="21005">Hewitt</option>
+					<option value="21046">Hickory Creek</option>
+					<option value="21073">Hico</option>
+					<option value="21180">Highland Park</option>
+					<option value="21184">Highland Village</option>
+					<option value="21290">Hillsboro</option>
+					<option value="21600">Holly Lake Ranch</option>
+					<option value="21742">Honey Grove</option>
+					<option value="21899">Horseshoe Bay</option>
+					<option value="21970">Houston</option>
+					<option value="22007">Howe</option>
+					<option value="22052">Hubbard</option>
+					<option value="22103">Hudson Oaks</option>
+					<option value="22124">Hughes Springs</option>
+					<option value="22135">Hugo</option>
+					<option value="22272">Huntsville</option>
+					<option value="22305">Hurst</option>
+					<option value="22324">Hutchins</option>
+					<option value="22395">Idabel</option>
+					<option value="22555">Indianapolis</option>
+					<option value="22604">Ingleside</option>
+					<option value="22710">Iraan</option>
+					<option value="22713">Iredell</option>
+					<option value="22784">Irving</option>
+					<option value="22863">Italy</option>
+					<option value="22865">Itasca</option>
+					<option value="22890">Ivanhoe</option>
+					<option value="22921">Jacksboro</option>
+					<option value="22980">Jacksonville</option>
+					<option value="23178">Jasper</option>
+					<option value="23223">Jefferson</option>
+					<option value="23341">Jester</option>
+					<option value="23360">Jewett</option>
+					<option value="23489">Jonesboro</option>
+					<option value="23540">Josephine</option>
+					<option value="23544">Joshua</option>
+					<option value="23630">Justin</option>
+					<option value="23648">Kaiser</option>
+					<option value="23727">Karnack</option>
+					<option value="23730">Karnes City</option>
+					<option value="23757">Katy</option>
+					<option value="23760">Kaufman</option>
+					<option value="23821">Keene</option>
+					<option value="23851">Keller</option>
+					<option value="23908">Kemp</option>
+					<option value="23972">Kennedale</option>
+					<option value="24065">Kerens</option>
+					<option value="24086">Kerrville</option>
+					<option value="24158">Kiamichi Christian Mission</option>
+					<option value="24191">Kilgore</option>
+					<option value="24200">Killeen</option>
+					<option value="24345">Kingston</option>
+					<option value="24416">Kirbyville</option>
+					<option value="24454">Kirvin</option>
+					<option value="24506">Klondike</option>
+					<option value="24611">Kopperl</option>
+					<option value="24663">Krugerville</option>
+					<option value="24664">Krum</option>
+					<option value="24758">La Grange</option>
+					<option value="24906">Ladonia</option>
+					<option value="24943">Lago Vista</option>
+					<option value="24959">Laguna Park</option>
+					<option value="25007">Lake Bridgeport</option>
+					<option value="25009">Lake Brownwood</option>
+					<option value="25049">Lake Creek</option>
+					<option value="25054">Lake Dallas</option>
+					<option value="25119">Lake Kiowa</option>
+					<option value="25258">Lake Worth</option>
+					<option value="25311">Lakeside</option>
+					<option value="25369">Lakewood Village</option>
+					<option value="25458">Lancaster</option>
+					<option value="25571">Lantana</option>
+					<option value="25603">Laredo</option>
+					<option value="25633">Larue</option>
+					<option value="25767">Lavon</option>
+					<option value="25777">Lawn</option>
+					<option value="26000">Leesburg</option>
+					<option value="26171">Leonard</option>
+					<option value="26306">Lewisville</option>
+					<option value="26314">Lexington</option>
+					<option value="26359">Liberty</option>
+					<option value="26425">Lillian</option>
+					<option value="26545">Lindale</option>
+					<option value="26581">Lindsay</option>
+					<option value="26601">Lingleville</option>
+					<option value="26648">Lipan</option>
+					<option value="26728">Little Elm</option>
+					<option value="26837">Livingston</option>
+					<option value="26854">Llano</option>
+					<option value="26971">Log Cabin</option>
+					<option value="27010">Lolita</option>
+					<option value="27034">Lometa</option>
+					<option value="27061">Lone Oak</option>
+					<option value="27160">Longview</option>
+					<option value="27224">Lorena</option>
+					<option value="27303">Lott</option>
+					<option value="27354">Lovelady</option>
+					<option value="27537">Lueders</option>
+					<option value="27768">Mabank</option>
+					<option value="28016">Malakoff</option>
+					<option value="28048">Malone</option>
+					<option value="28198">Mannford</option>
+					<option value="28283">Mansfield</option>
+					<option value="28420">Marble Falls</option>
+					<option value="28466">Marfa</option>
+					<option value="28652">Marshall</option>
+					<option value="28718">Martindale</option>
+					<option value="28815">Mason</option>
+					<option value="28924">Maud</option>
+					<option value="28982">May</option>
+					<option value="29039">Maypearl</option>
+					<option value="29185">Mc Gregor</option>
+					<option value="29246">McAlester</option>
+					<option value="29248">McAllen</option>
+					<option value="29377">McKinney</option>
+					<option value="54022">McLendon Chisholm</option>
+					<option value="29612">Melissa</option>
+					<option value="29664">Memphis</option>
+					<option value="29771">Meridian</option>
+					<option value="29780">Merit</option>
+					<option value="29782">Merkel</option>
+					<option value="29831">Mertens</option>
+					<option value="29861">Mesquite</option>
+					<option value="29899">Mexia</option>
+					<option value="30083">Midlothian</option>
+					<option value="30204">Milford</option>
+					<option value="30349">Millsap</option>
+					<option value="30468">Mineola</option>
+					<option value="30489">Mineral Wells</option>
+					<option value="30510">Mingus</option>
+					<option value="30855">Monrovia</option>
+					<option value="30871">Montague</option>
+					<option value="30874">Montalba</option>
+					<option value="30950">Montgomery</option>
+					<option value="31050">Moody</option>
+					<option value="31164">Morgan</option>
+					<option value="31172">Morgan Mill</option>
+					<option value="31337">Mosheim</option>
+					<option value="31418">Mount Calm</option>
+					<option value="31554">Mount Pleasant</option>
+					<option value="31622">Mount Vernon</option>
+					<option value="31726">Moyers</option>
+					<option value="31749">Muenster</option>
+					<option value="31784">Mullin</option>
+					<option value="31822">Murchison</option>
+					<option value="31842">Murphy</option>
+					<option value="31929">Nacogdoches</option>
+					<option value="31986">Naples</option>
+					<option value="32113">Navarro</option>
+					<option value="32235">Nemo</option>
+					<option value="32300">Nevada</option>
+					<option value="32367">New Braunfels</option>
+					<option value="32722">New Waverly</option>
+					<option value="32756">Newark</option>
+					<option value="53222">Newark City</option>
+					<option value="32804">Newcastle</option>
+					<option value="32907">Newton</option>
+					<option value="33076">Nocona</option>
+					<option value="33101">Noodle</option>
+					<option value="33500">North Richland Hills</option>
+					<option value="33778">Novice</option>
+					<option value="33897">Oak Leaf</option>
+					<option value="33907">Oak Point</option>
+					<option value="33958">Oakhurst</option>
+					<option value="34035">Oakwood</option>
+					<option value="34309">Old Glory</option>
+					<option value="34367">Olden</option>
+					<option value="34443">Olney</option>
+					<option value="34469">Omaha</option>
+					<option value="53586">Out of State</option>
+					<option value="34959">Ovalo</option>
+					<option value="34966">Overbrook</option>
+					<option value="34982">Overton</option>
+					<option value="34990">Ovilla</option>
+					<option value="35126">Paducah</option>
+					<option value="35176">Palacios</option>
+					<option value="35194">Palestine</option>
+					<option value="35242">Palmer</option>
+					<option value="35283">Palo Pinto</option>
+					<option value="35297">Paluxy</option>
+					<option value="35340">Pantego</option>
+					<option value="35372">Paradise</option>
+					<option value="35480">Paris</option>
+					<option value="35786">Pattonville</option>
+					<option value="35925">Peaster</option>
+					<option value="35931">Pecan Gap</option>
+					<option value="35993">Pelican Bay</option>
+					<option value="36056">Penelope</option>
+					<option value="36200">Perrin</option>
+					<option value="36343">Petty</option>
+					<option value="36449">Pickton</option>
+					<option value="36554">Pilot Point</option>
+					<option value="36694">Pineland</option>
+					<option value="36837">Pittsburg</option>
+					<option value="36933">Plano</option>
+					<option value="54023">Poetry</option>
+					<option value="37178">Point</option>
+					<option value="37214">Pointblank</option>
+					<option value="37304">Ponder</option>
+					<option value="37342">Poolville</option>
+					<option value="37385">Port Aransas</option>
+					<option value="37431">Port Lavaca</option>
+					<option value="53746">Possum Kingdom Lake</option>
+					<option value="37594">Potosi</option>
+					<option value="37617">Pottsboro</option>
+					<option value="37641">Powderly</option>
+					<option value="37649">Powell</option>
+					<option value="37691">Poynor</option>
+					<option value="37694">Praco</option>
+					<option value="37895">Princeton</option>
+					<option value="37923">Proctor</option>
+					<option value="37965">Prosper</option>
+					<option value="37989">Providence Village</option>
+					<option value="38068">Purdon</option>
+					<option value="38093">Putnam</option>
+					<option value="38235">Quinlan</option>
+					<option value="38250">Quitaque</option>
+					<option value="38256">Quitman</option>
+					<option value="38335">Rainbow</option>
+					<option value="38416">Rancho Viejo</option>
+					<option value="38455">Randolph</option>
+					<option value="38470">Ranger</option>
+					<option value="38540">Ravenna</option>
+					<option value="38717">Red Oak</option>
+					<option value="38950">Reno</option>
+					<option value="39150">Rhome</option>
+					<option value="39163">Rice</option>
+					<option value="39188">Richards</option>
+					<option value="39192">Richardson</option>
+					<option value="39240">Richland</option>
+					<option value="39244">Richland Hills</option>
+					<option value="39379">Riesel</option>
+					<option value="39426">Ringgold</option>
+					<option value="39469">Rio Vista</option>
+					<option value="39494">Rising Star</option>
+					<option value="39532">River Oaks</option>
+					<option value="39583">Riverside</option>
+					<option value="39646">Roanoke</option>
+					<option value="39677">Robert Lee</option>
+					<option value="39728">Rochelle</option>
+					<option value="39891">Rocksprings</option>
+					<option value="39908">Rockwall</option>
+					<option value="39922">Rockwood</option>
+					<option value="40139">Roscoe</option>
+					<option value="40280">Rosser</option>
+					<option value="40292">Rosston</option>
+					<option value="40349">Round Rock</option>
+					<option value="40387">Rowlett</option>
+					<option value="40409">Roxton</option>
+					<option value="40450">Royse City</option>
+					<option value="40506">Rule</option>
+					<option value="40525">Runaway Bay</option>
+					<option value="40574">Rusk</option>
+					<option value="40713">Sachse</option>
+					<option value="40732">Sadler</option>
+					<option value="40759">Saginaw</option>
+					<option value="40893">Saint James</option>
+					<option value="40899">Saint Jo</option>
+					<option value="41001">Saint Paul</option>
+					<option value="41011">Saint Petersburg</option>
+					<option value="41157">Saltillo</option>
+					<option value="41195">San Angelo</option>
+					<option value="41201">San Antonio</option>
+					<option value="41441">Sanger</option>
+					<option value="41451">Sansom Park</option>
+					<option value="41455">Santa Anna</option>
+					<option value="41508">Santo</option>
+					<option value="41543">Saratoga</option>
+					<option value="41646">Savannah</option>
+					<option value="41657">Savoy</option>
+					<option value="41739">Schenectady</option>
+					<option value="41904">Scroggins</option>
+					<option value="41909">Scurry</option>
+					<option value="41936">Seagoville</option>
+					<option value="42232">Seven Oaks</option>
+					<option value="42235">Seven Points</option>
+					<option value="42320">Shady Shores</option>
+					<option value="42604">Shepherd</option>
+					<option value="42648">Sherman</option>
+					<option value="42879">Sidney</option>
+					<option value="43028">Simms</option>
+					<option value="43181">Slaton</option>
+					<option value="43201">Slidell</option>
+					<option value="43293">Smithville</option>
+					<option value="43785">South Padre Island</option>
+					<option value="43939">Southlake</option>
+					<option value="43941">Southmayd</option>
+					<option value="44086">Spicewood</option>
+					<option value="44143">Spring Branch</option>
+					<option value="44295">Springtown</option>
+					<option value="44383">Stamford</option>
+					<option value="44473">Star</option>
+					<option value="44629">Stephenville</option>
+					<option value="44689">Stewards Mill</option>
+					<option value="45002">Strawn</option>
+					<option value="45014">Streetman</option>
+					<option value="45179">Sulphur Bluff</option>
+					<option value="45186">Sulphur Springs</option>
+					<option value="45280">Sumner</option>
+					<option value="45368">Sunnyvale</option>
+					<option value="45386">Sunset</option>
+					<option value="45430">Surfside Beach</option>
+					<option value="45574">Sweetwater</option>
+					<option value="45740">Talco</option>
+					<option value="45747">Talihina</option>
+					<option value="45785">Talpa</option>
+					<option value="45846">Tappahannock</option>
+					<option value="45950">Teague</option>
+					<option value="45985">Telephone</option>
+					<option value="46043">Tennessee Colony</option>
+					<option value="46084">Terrell</option>
+					<option value="46114">Texarkana</option>
+					<option value="46129">Thackerville</option>
+					<option value="46153">The Colony</option>
+					<option value="46338">Throckmorton</option>
+					<option value="46474">Tioga</option>
+					<option value="46570">Tolar</option>
+					<option value="46608">Tom Bean</option>
+					<option value="46724">Tow</option>
+					<option value="46853">Trent</option>
+					<option value="46873">Trenton</option>
+					<option value="46920">Trinidad</option>
+					<option value="46929">Trinity</option>
+					<option value="46954">Trophy Club</option>
+					<option value="46961">Troup</option>
+					<option value="47007">Troy</option>
+					<option value="47193">Tuscola</option>
+					<option value="47282">Tye</option>
+					<option value="47288">Tyler</option>
+					<option value="47551">University Park</option>
+					<option value="48680">Valley Mills</option>
+					<option value="48696">Valley View</option>
+					<option value="48720">Van</option>
+					<option value="48722">Van Alstyne</option>
+					<option value="48887">Venus</option>
+					<option value="49529">Waco</option>
+					<option value="49557">Waelder</option>
+					<option value="49798">Walnut Springs</option>
+					<option value="50124">Watauga</option>
+					<option value="50320">Waxahachie</option>
+					<option value="50381">Weatherford</option>
+					<option value="50624">Weslaco</option>
+					<option value="50641">West</option>
+					<option value="51101">West Tawakoni</option>
+					<option value="51241">Westlake</option>
+					<option value="51256">Westminster</option>
+					<option value="51285">Weston</option>
+					<option value="51302">Westover Hills</option>
+					<option value="51365">Westworth Village</option>
+					<option value="51576">White Settlement</option>
+					<option value="51618">Whitehouse</option>
+					<option value="51641">Whitesboro</option>
+					<option value="51672">Whitewright</option>
+					<option value="51703">Whitney</option>
+					<option value="51712">Whitt</option>
+					<option value="51731">Wichita Falls</option>
+					<option value="51950">Willis</option>
+					<option value="51996">Willow Park</option>
+					<option value="52020">Wills Point</option>
+					<option value="52029">Wilmer</option>
+					<option value="52166">Windom</option>
+					<option value="52216">Winfield</option>
+					<option value="52268">Winnsboro</option>
+					<option value="52275">Winona</option>
+					<option value="52315">Winters</option>
+					<option value="52422">Wolfe City</option>
+					<option value="52606">Woodson</option>
+					<option value="52646">Woodway</option>
+					<option value="52696">Wortham</option>
+					<option value="52781">Wylie</option>
+					<option value="52858">Yantis</option>
+					<option value="53068">Zephyr</option>
+				</select>
+			</div>
+			<div style="text-align: center; width: 100%;">
+				<input id="QS-buttonSearch" class="typeface-js" type="submit" name="searchSubmit" value="Search Now" />
+			</div>
+		<% end %>
+	</div>
+</div>
+<div id="advanced_search" class="typeface-js">
+	<div style="float: left;">
+	<%= link_to(image_tag(image_path("advanced-search-button.png")), advanced_search_listings_path) %>
+	</div>
+	<div style="float: left; margin-top: 11px;">
+	<%= link_to("Go to Advanced Search", advanced_search_listings_path, :style => "margin-left: 13px;") %>
+	</div>
+</div>

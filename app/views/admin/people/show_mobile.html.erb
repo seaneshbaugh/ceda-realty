@@ -1,0 +1,22 @@
+<h2>Name:</h2>
+<div><%= @person.name %></div>
+<h2>First Name:</h2>
+<div><%= @person.first_name %></div>
+<h2>Last Name:</h2>
+<div><%= @person.last_name %></div>
+<h2>Email Address:</h2>
+<div><%= @person.email_address %></div>
+<h2>Phone Number:</h2>
+<div><%= @person.phone_number %></div>
+<h2>Privilege Level:</h2>
+<div><%= @person.privilege_level %></div>
+<h2>Created at: <%= @person.created_at.strftime("%Y-%m-%d %H:%M:%S") %></h2>
+<h2>Last Updated at: <%= @person.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></h2>
+<% if @user == @person or @user.privilege_level > @person.privilege_level %>
+	<div>
+		<a onclick="return loadpage('<%= edit_admin_person_path(@person) %>');">Edit User</a>
+	<% if @user != @person %>
+		| <%= link_to("Delete User", admin_person_path(@person), :method => :delete, :confirm => "Are you sure you want to delete this user? This action cannot be undone!") %>
+	<% end %>
+	</div>
+<% end %>

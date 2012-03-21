@@ -1,0 +1,124 @@
+<div id="icondock" class="grid_12">
+	<ul>
+		<li>
+			<% content_tag(:a, :href => new_admin_person_path, :rel => "tipsy", :title => "Add a new user to the site.") do %>
+				<%= image_tag(image_path("icons/32x32/user-add.png")) %><br />
+				New User
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => new_admin_page_path, :rel => "tipsy", :title => "Add a new page to the site.") do %>
+				<%= image_tag(image_path("icons/32x32/page-add.png")) %><br />
+				New Page
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => new_admin_blog_path, :rel => "tipsy", :title => "Add a new post to the site's main blog.") do %>
+				<%= image_tag(image_path("icons/32x32/blog-post-add.png")) %><br />
+				New Post
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => new_admin_agent_path, :rel => "tipsy", :title => "Add a new agent to the roster.") do %>
+				<%= image_tag(image_path("icons/32x32/she-user-add.png")) %><br />
+				New Agent
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => new_admin_listing_path, :rel => "tipsy", :title => "Add or import a new listing.") do %>
+				<%= image_tag(image_path("icons/32x32/home-add.png")) %><br />
+				New Listing
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => new_admin_agent_resource_path, :rel => "tipsy", :title => "Add or upload a new agent resource.") do %>
+				<%= image_tag(image_path("icons/32x32/page-add.png")) %><br />
+				New Resource
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => admin_logger_events_path, :rel => "tipsy", :title => "View all recorded events in the database log.") do %>
+				<%= image_tag(image_path("icons/32x32/database.png")) %><br />
+				Event Log
+			<% end %>
+		</li>
+		<li>
+			<% content_tag(:a, :href => "#", :rel => "tipsy", :title => "View an overview of the site's statistics.") do %>
+				<%= image_tag(image_path("icons/32x32/chart.png")) %><br />
+				Statistics
+			<% end %>
+		</li>
+	</ul>
+</div>
+<div class="container_12">
+	<div class="clearfix">
+		&nbsp;
+	</div>
+	<h3 class="acc_trigger active"><a href="#">Latest Logged Events</a></h3>
+	<div style="display: block;" class="acc_container">
+		<div class="block">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody>
+					<tr class="even">
+						<th scope="col">
+							ID
+						</th>
+						<th scope="col">
+							User
+						</th>
+						<th scope="col">
+							Type
+						</th>
+						<th scope="col">
+							Description
+						</th>
+						<th scope="col">
+							Created At
+						</th>
+					</tr>
+					<% even_row = false %>
+					<% for logger_event in @last_ten_events %>
+						<%if even_row %><tr class="even"><% else %><tr><% end %><% even_row = !even_row %>
+							<td scope="col"><%= logger_event.id %></td>
+							<td scope="col">
+								<% if !logger_event.person.nil? %>
+									<%= logger_event.person.name %>
+								<% else %>
+									None
+								<% end %>
+							</td>
+							<td scope="col"><%= logger_event.event_type %></td>
+							<td scope="col"><%= logger_event.description %></td>
+							<td scope="col"><%= logger_event.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<h3 class="acc_trigger"><a href="#">Some other data goes here</a></h3>
+	<div style="display: none;" class="acc_container">
+		<div class="block">
+			<p>
+				Haven't decided what yet.
+			</p>
+		</div>
+	</div>
+	<h3 class="acc_trigger"><a href="#">No idea what will go here</a></h3>
+	<div style="display: none;" class="acc_container">
+		<div class="block">
+			<p>
+				This may not even be necessary.
+			</p>
+		</div>
+	</div>
+</div>
+<!-- <% ActionController::Routing::Routes.routes.each do |r| %>
+	<%= r %><br />
+<% end %>
+
+<hr />
+
+<% ActionController::Routing::Routes.named_routes.routes.each do |name, route| %>
+	<%= name.to_s + " " + route.to_s %><br />
+<% end %> -->

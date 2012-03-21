@@ -1,0 +1,35 @@
+<div id="blog_post_container">
+	<div class="blog_post">
+		<h2>
+			<% if !@blog.title.nil? %>
+				<%= @blog.title %>
+			<% else %>
+				Post #<%= @blog.id %>
+			<% end %>
+		</h2>
+		<div class="blog_post_info">
+			<div class="blog_post_info_poster typeface-js">
+				Posted by <%= @blog.person.first_name %>
+			</div>
+			<div class="blog_post_info_date typeface-js">
+				<%= @blog.created_at.strftime("at %l:%M %p on %b %d, %Y") %>
+			</div>
+		</div>
+		<% if @blog.style %>
+			<style>
+				<%= @blog.style %>
+			</style>
+		<% end %>
+		<div class="blog_post_body">
+			<%= @blog.body %>
+		</div>
+	</div>
+
+	<div class="post-footer">
+		<% if @back_page_number > 1 %>
+			<%= link_to("Back to post list...", blogs_path, :page => @back_page_number) %>
+		<% else %>
+			<%= link_to("Back to post list...", blogs_path) %>
+		<% end %>
+	</div>
+</div>

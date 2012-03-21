@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>
+		CEDA Realty<% if !@page_title.blank? %> - <%= @page_title %><% end %>
+	</title>
+	<meta name="description" content="<% if !@meta_description.blank? %><%= @meta_description %><% else %>CEDA Realty, reinventing the real estate experience!<% end %>">
+	<meta name="author" content="Ceda Realty">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%= stylesheet_link_tag "reset.css" %>
+	<%= stylesheet_link_tag "960.css" %>
+	<%= stylesheet_link_tag "application.css" %>
+	<%= javascript_include_tag "jquery-1.3.2.min.js" %>
+	<%= javascript_include_tag "application.js" %>
+	<![if !IE]>
+	<%= javascript_include_tag "typeface-0.15.js" %>
+	<%= javascript_include_tag "futura_light_regular.typeface.js" %>
+	<%= javascript_include_tag "futura_medium_regular.typeface.js" %>
+	<![endif]>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+	<% if @user.nil? %>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-25093838-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+	<% end %>
+	<script type="text/javascript">
+		if (top.location != self.location) {
+			top.location = self.location.href
+		}
+	</script>
+</head>
+<body>
+	<header class="container_12">
+		<div id="ceda_logo" class="grid_6">
+			<%= link_to(image_tag(image_path("ceda-logo.png")), root_path) %>
+		</div>
+		<div id="ceda-mobile" class="grid_3">
+			<%= link_to(image_tag(image_path("ceda-mobile.jpg")), "http://itunes.apple.com/us/app/myagent-by-idx/id336858030?mt=8") %>
+		</div>
+		<div id="header_info" class="grid_3">
+			<div id="contact_container">
+				<div id="contact" class="typeface-js">
+					Phone: <a href="tel:972-378-9200">972-378-9200</a><br />
+					Email: <a href="mailto:contact@cedarealty.com">contact@cedarealty.com</a>
+				</div>
+			</div>
+			<div id="social_container">
+				<div id="social">
+					<a href="http://twitter.com/#!/cedarealty"><img src="/images/twitter.png" id="twitter"></a><a href="http://www.facebook.com/pages/Ceda-Realty/212039332179031"><img src="/images/facebook.png" id="facebook"></a><a href="http://www.linkedin.com/groups/Ceda-Realty-4036486?home=&gid=4036486"><img src="/images/linked-in.png" id="linked-in"></a><a href="http://www.youtube.com/user/cedatv"><img src="/images/youtube.png" id="youtube"></a>
+				</div>
+				<div id="social_reflection">
+					<img src="/images/twitter-reflection.png" id="twitter_reflection"><img src="/images/facebook-reflection.png" id="facebook_reflection"><img src="/images/linked-in-reflection.png" id="linked-in_reflection"><img src="/images/youtube-reflection.png" id="youtube_reflection">
+				</div>
+			</div>
+		</div>
+	</header>
+	<nav id="main" class="container_12">
+		<ul class="grid_12 typeface-js">
+			<li>
+				<%= link_to("Home", root_path, :title => "Home", :class => "nav_first") %>
+			</li>
+			<li>
+				<%= link_to("Listings", listings_path, :title => "Listings") %>
+			</li>
+			<li>
+				<%= link_to("Agents + Team", agents_path, :title => "Agents") %>
+			</li>
+			<% for page in @top_level_pages %>
+				<li>
+					<%= link_to(page.title, page_path(page), :title => page.title) %>
+					<% if !page.subpages.nil? and !page.subpages.empty? %>
+						<ul>
+							<% for subpage in page.subpages %>
+								<li>
+									<%= link_to(subpage.title, page_path(subpage), :title => page.title) %>
+								</li>
+							<% end %>
+						</ul>
+					<% end %>
+				</li>
+			<% end %>
+			<li>
+				<%= link_to("Blog", blogs_path, :title => "Blog") %>
+			</li>
+		</ul>
+	</nav>
+	<% if flash[:notice] %>
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="flash_notice" class="notification <%= flash[:type] %> click_to_close">
+					<p><%= flash[:notice] %></p>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<% if flash[:debug] %>
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="flash_debug" class="grid_12 notification information click_to_close">
+					<div><%= debug flash[:debug] %></div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<div id="content" class="container_12" <% if controller.controller_name == "pages" and controller.action_name =="index" %> style="max-height: 379px; overflow:hidden;"<% end %>>
+			<div id="mls_quick_search" class="grid_3">
+				<%= render :partial => "layouts/mls_quick_search" %>
+			</div>
+			<div class="grid_9">
+				<%= yield %>
+			</div>
+	</div>
+	<footer class="container_12">
+		<div id="culture_of_excellence" class="grid_12">
+			<%= image_tag(image_path("culture-of-excellence.png")) %>
+		</div>
+		<div id="widgets" class="grid_12">
+			<div class="widget">
+				<%= link_to(image_tag(image_path("ceda-certified.png")), page_path("ceda-certified")) %>
+			</div>
+			<div class="widget_divider"></div>
+			<div class="widget">
+				<%= link_to(image_tag(image_path("ceda-careers.png")), page_path("careers")) %>
+			</div>
+			<div class="widget_divider"></div>
+			<div class="widget">
+				<!--<%= link_to(image_tag(image_path("iphone-enabled.png")), "http://itunes.com/apps/myagentbyidx") %>-->
+				<%= link_to(image_tag(image_path("first-united-mortgage.jpg")), "http://kdecker.fubmortgage.com/Default.aspx") %>
+			</div>
+		</div>
+		<div id="login_links" class="grid_12">
+				<% if !@user %>
+					<%= link_to(image_tag(image_path("agent-log-in.png")), new_session_path, :title => "Log In") %>
+				<% else %>
+					<%= link_to(image_tag(image_path("agent-log-out.png")), @application_session, :method => :delete, :title => "Log Out") %>
+					<% if @user.privilege_level >= 2 %>
+						<%= link_to(image_tag(image_path("mobile-office.png")), agent_root_path, :title => "Admin Panel") %>
+					<% end %>
+					<% if @user.privilege_level > 2 %>
+						<%= link_to(image_tag(image_path("admin-panel.png")), admin_root_path, :title => "Admin Panel") %>
+					<% end %>
+				<% end %>
+		</div>
+	</footer>
+</body>
+</html>

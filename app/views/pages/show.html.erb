@@ -1,0 +1,10 @@
+<div id="page_container">
+	<% if !@page.style.blank? %>
+		<style>
+			<%= @page.style %>
+		</style>
+	<% end %>
+	<% if !@page.body.blank? %>
+		<%= @page.body %>
+	<% end %>
+</div>

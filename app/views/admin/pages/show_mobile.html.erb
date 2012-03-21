@@ -1,0 +1,26 @@
+<h2>ID:</h2>
+<div><%= @page.id %></div>
+<h2>Parent ID:</h2>
+<div><%= @page.parent_id %><% !@page.parent_id.blank? and !@page.parent.nil? %><%= link_to(@page.parent.title, admin_page_path(@page.parent)) %></div>
+<h2>Title:</h2>
+<div><%= @page.title %></div>
+<h2>Display Order:</h2>
+<div><%= @page.display_order %></div>
+<h2>Body:</h2>
+<div>
+	<% if !@page.body.blank? %>
+		<%= h(@page.body) %>
+	<% end %>
+</div>
+<h2>CSS Style:</h2>
+<div>
+	<% if !@page.style.blank? %>
+		<%= h(@page.style) %>
+	<% end %>
+</div>
+<h2>Created at: <%= @page.created_at.strftime("%Y-%m-%d %H:%M:%S") %></h2>
+<h2>Last Updated at: <%= @page.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></h2>
+<div>
+	<a onclick="return loadpage('<%= edit_admin_page_path(@page) %>');">Edit User</a>
+	<%= link_to("Delete User", admin_page_path(@page), :method => :delete, :confirm => "Are you sure you want to delete this page? This action cannot be undone!") %>
+</div>

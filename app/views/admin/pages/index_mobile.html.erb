@@ -1,0 +1,50 @@
+<div class="add-link">
+	<a onclick="return loadpage('<% new_admin_page_path %>');"><%= image_tag(image_path("icons/32x32/page-add.png"), :title => "New Page", :alt => "New Page") %>Add New Page</a>
+</div>
+<table>
+	<tbody>
+		<tr>
+			<th class="lefttop-radius">
+				ID
+			</th>
+			<th>
+				Parent ID
+			</th>
+			<th>
+				Title
+			</th>
+			<th>
+				Display Order
+			</th>
+			<th class="righttop-radius">
+				Actions
+			</th>
+		</tr>
+		<% even_row = false %>
+		<% for page in @pages %>
+			<%if even_row %><tr class="t-color"><% else %><tr><% end %><% even_row = !even_row %>
+				<td>
+					<a onclick="return loadpage('<%= admin_page_path(page) %>');"><%= page.id %></a>
+				</td>
+				<td>
+					<% if !page.parent_id.blank? and !page.parent.nil? %>
+						<a onclick="return loadpage('<%= admin_page_path(page.parent) %>');"><%= page.parent_id %></a>
+					<% else %>
+						-
+					<% end %>
+				</td>
+				<td>
+					<a onclick="return loadpage('<%= admin_page_path(page) %>');"><%= page.title %></a>
+				</td>
+				<td>
+					<%= page.display_order %>
+				</td>
+				<td class="center">
+					<a onclick="return loadpage('<%= edit_admin_page_path(page) %>');"><%= image_tag(image_path("icons/16x16/edit.png"), :title => "Edit", :alt => "Edit") %></a>
+					<%= link_to image_tag(image_path("icons/16x16/remove.png"), :title => "Delete", :alt => "Delete"), admin_page_path(page), :method => :delete, :confirm => "Are you sure you want to delete this page? This action cannot be undone!" %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= will_paginate @pages, :renderer => 'AjaxLinkRenderer' %>

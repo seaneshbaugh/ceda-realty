@@ -1,0 +1,9 @@
+<div id="account_recovery_container">
+	<h2 class="typeface-js">Account Recovery</h2>
+	<p>Please click the following link to log in to your account. You can change your password by going to the admin panel and clicking "Settings" located in the upper right hand corner. It is strongly advised that you do this immediately.</p>
+	<p>
+		<% url = "http://#{@domain}#{recovery_session_path(@key)}" %>
+		<%= link_to "Log me in!", url %>
+	</p>
+</div>
+

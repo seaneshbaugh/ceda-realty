@@ -1,0 +1,56 @@
+<div class="add-link">
+	<a onclick="return loadpage('<% new_admin_picture_path %>');"><%= image_tag(image_path("icons/32x32/image-add.png"), :title => "New Picture", :alt => "New Picture") %>Add New Picture</a>
+</div>
+<table>
+	<tbody>
+		<tr>
+			<th class="lefttop-radius">
+				ID
+			</th>
+			<th>
+				Thumbnail
+			</th>
+			<th>
+				Title
+			</th>
+			<th>
+				Caption
+			</th>
+			<th>
+				Alt Text
+			</th>
+			<th class="righttop-radius">
+				Actions
+			</th>
+		</tr>
+		<% even_row = false %>
+		<% for picture in @pictures %>
+			<%if even_row %><tr class="t-color"><% else %><tr><% end %><% even_row = !even_row %>
+				<td>
+					<a onclick="return loadpage('<%= admin_picture_path(picture) %>');"><%= picture.id %></a>
+				</td>
+				<td>
+					<% if !picture.thumbnail_path.blank? %>
+						<%= link_to(image_tag(picture.thumbnail_path, :width => 50), admin_picture_path(picture)) %>
+					<% else %>
+						No Thumbnail
+					<% end %>
+				</td>
+				<td>
+					<%= truncate(picture.title, 64) %>
+				</td>
+				<td>
+					<%= truncate(picture.caption, 64) %>
+				</td>
+				<td>
+					<%= truncate(picture.alt_text, 64) %>
+				</td>
+				<td class="center">
+					<a onclick="return loadpage('<%= edit_admin_picture_path(picture) %>');"><%= image_tag(image_path("icons/16x16/edit.png"), :title => "Edit", :alt => "Edit") %></a>
+					<%= link_to image_tag(image_path("icons/16x16/remove.png"), :title => "Delete", :alt => "Delete"), admin_picture_path(picture), :method => :delete, :confirm => "Are you sure you want to delete this picture? This action cannot be undone!" %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= will_paginate @pictures, :renderer => 'AjaxLinkRenderer' %>

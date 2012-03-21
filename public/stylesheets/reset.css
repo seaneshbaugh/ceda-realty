@@ -1,0 +1,233 @@
+@charset "utf-8";
+
+/*
+	html5doctor.com Reset Stylesheet
+	v1.6.1
+	Last Updated: 2010-09-17
+	Author: Richard Clark - http://richclarkdesign.com
+	Twitter: @rich_clark
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	background: transparent;
+	border: 0;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+body {
+	line-height: 1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+	display: block;
+}
+
+nav ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+a {
+	background: transparent;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+ins {
+	background-color: #ffff99;
+	color: #000000;
+	text-decoration: none;
+}
+
+mark {
+	background-color: #ffff99;
+	color: #000000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid #cccccc;
+	display: block;
+	height: 1px;
+	margin: 1em 0;
+	padding: 0;
+}
+
+input, select {
+	vertical-align: middle;
+}
+
+/*
+	Normalize monospace sizing
+	en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
+*/
+
+pre, code, kbd, samp {
+	font-family: monospace, sans-serif;
+}
+
+/*
+	Minimal baseline text styles
+*/
+
+body, select, input, textarea {
+	/* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
+/*
+	color: #444444;
+	font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+*/
+}
+
+/*
+	Headers (h1,h2,etc) have no default font-size or margin,
+	you'll want to define those yourself.
+*/
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: bold;
+}
+
+/*
+	Always force a scrollbar in non-IE
+*/
+
+html {
+	overflow-y: scroll;
+}
+
+/*
+	Accessible focus treatment
+	people.opera.com/patrickl/experiments/keyboard/test
+*/
+
+a:hover, a:active {
+	outline: none;
+}
+
+a, a:active, a:visited {
+	color: #607890;
+}
+
+a:hover {
+	color: #003366;
+}
+
+/*
+	Set proper list styles
+*/
+
+ul, ol {
+	margin-left: 1.8em;
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+nav ul, nav li {
+	margin: 0;
+}
+
+small {
+	font-size: 85%;
+}
+
+strong, th {
+	font-weight: bold;
+}
+
+td, td img {
+	vertical-align: top;
+}
+
+sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
+
+sup {
+	vertical-align: super;
+	font-size: smaller;
+}
+
+pre {
+	padding: 15px;
+	/* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+/*
+	Remove textarea scrollbars in IE
+	www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/
+
+*/
+textarea {
+	overflow: auto;
+}
+
+/*
+	Webkit browsers add a 2px margin outside the chrome of form elements
+*/
+
+button, input, select, textarea {
+	margin: 0;
+}
+
+/*
+	 Force images and objects to have a maximum width of 100% of their
+	 containing element.
+*/
+
+img {
+	max-width: 100%;
+}
+
+object {
+	max-width: 100%;
+}

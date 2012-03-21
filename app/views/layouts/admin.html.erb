@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>
+		CEDA Realty<% if !@page_title.blank? %> - <%= @page_title %><% end %>
+	</title>
+	<meta name="description" content="<% if !@meta_description.blank? %><%= @meta_description %><% else %>CEDA Realty, reinventing the real estate experience!<% end %>">
+	<meta name="author" content="CEDA Realty">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%= stylesheet_link_tag "reset.css" %>
+	<%= stylesheet_link_tag "960.css" %>
+	<%= stylesheet_link_tag "admin.css" %>
+	<%= javascript_include_tag "jquery-1.3.2.min.js" %>
+	<%= javascript_include_tag "jquery.tipsy.js" %>
+	<%= javascript_include_tag "admin.js" %>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+</head>
+<body>
+	<header>
+		<div id="head_wrap" class="container_12">
+			<div id="logo" class="grid_4">
+				<h1><%= link_to("Ceda Realty", root_path) %><br /><span>Admin Panel</span></h1>
+			</div>
+			<div id="controlpanel" class="grid_8">
+				<ul>
+					<li><p>Signed in as <strong><%= @user.first_name + " " + @user.last_name %></strong></p></li>
+					<li><%= link_to("Settings", edit_admin_person_path(@user), :class => "first")%></li>
+					<li><%= link_to("Sign Out", @application_session, :method => :delete, :title => "Sign Out", :class => "last") %></li>
+				</ul>
+			</div>
+			<div id="navigation" class=" grid_12">
+				<ul>
+					<li><%= link_to("Home", admin_root_path, :title => "Admin Panel Home", :id => "admin_menu") %></li>
+					<li><%= link_to("Users", admin_people_path, :title => "Users", :id => "people_menu") %></li>
+					<li><%= link_to("Pages", admin_pages_path, :title => "Pages", :id => "pages_menu") %></li>
+					<li><%= link_to("Agents", admin_agents_path, :title =>"Agents", :id => "agents_Menu") %></li>
+					<li><%= link_to("Listings", admin_listings_path, :title =>"Listings", :id => "listings_menu") %></li>
+					<li><%= link_to("Pictures", admin_pictures_path, :title => "Pictures", :id => "pictures_menu") %></li>
+					<li><%= link_to("Agent Resources", admin_agent_resources_path, :title => "Agent Resources", :id => "agent_resources_menu") %></li>
+					<li><%= link_to("Blog", admin_blogs_path, :title => "Blog Posts", :id => "blogs_menu") %></li>
+					<li><a href="javascript:alert('Coming Soon!');">Message Board</a></li>
+					<% if @user.privilege_level > 4 %>
+						<li><%= link_to("Reboot", admin_reboot_path) %></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<div id="sub_nav">
+		<div id="subnav_wrap" class="container_12">
+			<div id="subnav" class=" grid_12">
+				<% case controller.controller_name
+					when "people" %>
+						<ul>
+							<li><%= link_to("View All", admin_people_path, :title => "View All Users", :id => "people_index_menu_item") %></li>
+							<li><%= link_to("New User", new_admin_person_path, :title => "New User", :id => "people_new_menu_item") %></li>
+							<li><%= link_to("User Events", admin_logger_events_path(:search => "user"), :title => "User Events") %></li>
+						</ul>
+					<% when "pages" %>
+						<ul>
+							<li><%= link_to("View All", admin_pages_path, :title => "View All Pages", :id => "pages_index_menu_item") %></li>
+							<li><%= link_to("New Page", new_admin_page_path, :title => "New Page", :id => "pages_new_menu_item") %></li>
+							<li><%= link_to("Page Events", admin_logger_events_path(:search => "page"), :title => "Page Events") %></li>
+						</ul>
+					<% when "agents" %>
+						<ul>
+							<li><%= link_to("View All", admin_agents_path, :title => "View All Agent Resources", :id => "agent_index_menu_item") %></li>
+							<li><%= link_to("New Agent", new_admin_agent_path, :title => "New Agent Resource", :id => "agent_new_menu_item") %></li>
+							<li><%= link_to("Agent Events", admin_logger_events_path(:search => "agent"), :title => "Agent Events") %></li>
+						</ul>
+					<% when "listings" %>
+						<ul>
+							<li><%= link_to("View All", admin_listings_path, :title => "View All Listings", :id => "listings_index_menu_item") %></li>
+							<li><%= link_to("New Listing", new_admin_listing_path, :title => "New Listing", :id => "listings_new_menu_item") %></li>
+							<li><%= link_to("Listing Events", admin_logger_events_path(:search => "listing"), :title => "Listing Events") %></li>
+						</ul>
+					<% when "pictures" %>
+						<ul>
+							<li><%= link_to("View All", admin_pictures_path, :title => "View All Pictures", :id => "pictures_index_menu_item") %></li>
+							<li><%= link_to("New Picture", new_admin_picture_path, :title => "New Picture", :id => "pictures_new_menu_item") %></li>
+							<li><%= link_to("Picture Events", admin_logger_events_path(:search => "picture"), :title => "Picture Events") %></li>
+						</ul>
+					<% when "agent_resources" %>
+						<ul>
+							<li><%= link_to("View All", admin_agent_resources_path, :title => "View All Agent Resources", :id => "agent_resources_index_menu_item") %></li>
+							<li><%= link_to("New Agent Resource", new_admin_agent_resource_path, :title => "New Agent Resource", :id => "agent_resources_new_menu_item") %></li>
+							<li><%= link_to("Agent Resource Events", admin_logger_events_path(:search => "resource"), :title => "Agent Resource Events") %></li>
+						</ul>
+					<% when "blogs" %>
+						<ul>
+							<li><%= link_to("View All", admin_blogs_path, :title => "View All Blog Poss", :id => "blogs_index_menu_item") %></li>
+							<li><%= link_to("New Blog Post", new_admin_blog_path, :title => "New Blog Post", :id => "blogs_new_menu_item") %></li>
+							<li><%= link_to("Blog Post Events", admin_logger_events_path(:search => "blog"), :title => "Blog Post Events") %></li>
+						</ul>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<% if flash[:notice] %>
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="flash_notice" class="notification <%= flash[:type] %> click_to_close">
+					<p><%= flash[:notice] %></p>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<% if flash[:debug] %>
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="flash_debug" class="notification information click_to_close">
+					<div><%= debug flash[:debug] %></div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<div id="main_content_wrap" class="container_12">
+		<%= yield %>
+	</div>
+	<div class="clearfix">&nbsp;</div>
+	<div class="container_12">
+		<footer class="grid_12">
+			<p>&copy; Content Copyright <%= Time.now.year %> Ceda Realty | Created with <a href="http://rubyonrails.org/">Ruby on Rails</a> by <a href="http://seaneshbaugh.com/">Sean Eshbaugh</a>
+		</footer>
+	</div>
+	<div id="controller_name" class="<%= controller.controller_name %>"></div>
+	<div id="action_name" class="<%= controller.controller_name %>_<%= controller.action_name %>"></div>
+</body>
+</html>

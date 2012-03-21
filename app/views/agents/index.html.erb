@@ -1,0 +1,36 @@
+<div id="agents_container">
+	<h2 class="typeface-js">Agents + Team</h2>
+	<% if !@agents.nil? and !@agents.empty? %>
+		<% for agent in @agents %>
+			<div id="agent_<%= agent.id %>" class="agent_container">
+				<div class="agent_picture">
+					<% if !agent.picture.nil? and !agent.picture.image_path.blank? %>
+						<%= link_to(image_tag(image_path(agent.picture.image_path), :alt => agent.picture.alt_text), agent_path(agent)) %><br />
+					<% else %>
+						<%= link_to(image_tag(image_path("agent-no-picture-available.jpg"), :alt => agent.person.first_name + " " + agent.person.last_name), agent_path(agent)) %><br />
+					<% end %>
+				</div>
+				<div class="agent_info">
+					<div class="agent_name">
+						<%= agent.person.first_name %> <%= agent.person.last_name %>
+					</div>
+					<% if !agent.title.blank? %>
+						<div class="agent_title">
+							<%= agent.title %>
+						</div>
+					<% end %>
+          <div class="agent_email">
+            <% unless agent.display_email_address.blank? %>
+              <%= link_to(agent.display_email_address, "mailto:" + agent.display_email_address) %><br />
+            <% else %>
+              <%= link_to(agent.person.email_address, "mailto:" + agent.person.email_address) %><br />
+            <% end %>
+          </div>
+				</div>
+				<div class="agent_link">
+					<%= link_to("Meet " + agent.person.first_name, agent_path(agent)) %>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>
