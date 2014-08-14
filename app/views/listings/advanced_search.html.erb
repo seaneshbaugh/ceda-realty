@@ -1,5 +1,26 @@
 <div id="mls_search">
 	<h2 class="typeface-js">Advanced Search</h2>
 
-	<p>Coming soon!</p>
+	<iframe src="http://www.cedarealty.idxco.com/idx/9610/advancedSearch.php" id="iframe" scrolling="no" height="2500px" width="687px" frameBorder="0"></iframe>
 </div>
+<script>
+window.onload = function(){
+	var win = document.getElementById("iframe").contentWindow;
+
+	win.postMessage( "testing 1 2 3", "*" );
+
+	function receiveMessage(event) {
+		document.getElementById("iframe").height= event.data + "px";
+	}
+
+	window.addEventListener("message", receiveMessage, false);
+
+	function resizeEverySecond() {
+		var iframe = document.getElementById("iframe").contentWindow;
+
+		iframe.postMessage( "testing 1 2 3", "*" );
+	}
+
+	window.setInterval(resizeEverySecond, 1000);
+};
+</script>
