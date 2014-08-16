@@ -1,9 +1,0 @@
-<h2>Showing Agent: <%= @agent.person.name %></h2>
-<h4>User ID: <%= @agent.person_id %></h4>
-<h4>Picture ID: <%= @agent.picture_id %></h4>
-<h4>Created at: <%= @agent.created_at.strftime("%Y-%m-%d %H:%M:%S") %></h4>
-<h4>Last Updated at: <%= @agent.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></h4>
-<p class="show">
-	<%= link_to("Edit Agent", edit_admin_agent_path(@agent)) %> |
-	<%= link_to("Delete Agent", admin_agent_path(@agent), :method => :delete, :confirm => "Are you sure you want to delete this agent? This action cannot be undone!") %>
-</p>
