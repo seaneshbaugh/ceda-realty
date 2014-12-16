@@ -140,8 +140,11 @@
 			</div>
 			<div class="widget_divider"></div>
 			<div class="widget">
-				<!--<%= link_to(image_tag(image_path("iphone-enabled.png")), "http://itunes.com/apps/myagentbyidx") %>-->
-				<%= link_to(image_tag(image_path("first-united-mortgage.jpg")), "http://kdecker.fubmortgage.com/Default.aspx") %>
+				<% if rand(2) == 1 %>
+					<%= link_to(image_tag(image_path("first-united-mortgage.jpg")), "http://kdecker.fubmortgage.com/Default.aspx") %>
+				<% else %>
+					<%= link_to(image_tag(image_path("academy-mortgage.jpg")), "http://academymortgage.com/lo/coryherell#.VIoNXyvF9r8/") %>
+				<% end %>
 			</div>
 		</div>
 		<div id="login_links" class="grid_12">
