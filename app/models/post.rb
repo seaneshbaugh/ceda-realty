@@ -3,12 +3,12 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
 
-  validates_length_of     :title, maxiumum: 255
-  validates_presence_of   :title
+  validates_length_of :title, maximum: 255
+  validates_presence_of :title
   validates_uniqueness_of :title
 
-  validates_length_of     :slug, maximum: 255
-  validates_presence_of   :slug
+  validates_length_of :slug, maximum: 255
+  validates_presence_of :slug
   validates_uniqueness_of :slug
 
   validates_length_of :body, maximum: 65535
@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
 
   validates_length_of :meta_keywords, maximum: 65535
 
-  validates_associated  :user
+  validates_associated :user
   validates_presence_of :user_id
 
   before_validation :generate_slug

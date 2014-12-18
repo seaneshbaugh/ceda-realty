@@ -1,6 +1,8 @@
 require 'email_validator'
 
 class User < ActiveRecord::Base
+  has_one :profile, dependent: :destroy
+
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   rolify

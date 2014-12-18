@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217230040) do
+ActiveRecord::Schema.define(version: 20141218111027) do
 
   create_table "designations", force: true do |t|
     t.integer  "picture_id"
@@ -48,14 +48,29 @@ ActiveRecord::Schema.define(version: 20141217230040) do
 
   add_index "documents", ["file_fingerprint"], name: "index_documents_on_file_fingerprint", using: :btree
 
+  create_table "mls_names", force: true do |t|
+    t.integer  "profile_id",              null: false
+    t.string   "name",       default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mls_names", ["profile_id"], name: "index_mls_names_on_profile_id", using: :btree
+
   create_table "offices", force: true do |t|
     t.integer  "picture_id"
     t.integer  "manager_id"
-    t.string   "name",            default: "",   null: false
-    t.string   "address",         default: "",   null: false
+    t.string   "name",             default: "",   null: false
+    t.string   "street_address_1", default: "",   null: false
+    t.string   "street_address_2", default: "",   null: false
+    t.string   "city",             default: "",   null: false
+    t.string   "state",            default: "",   null: false
+    t.string   "zipcode",          default: "",   null: false
+    t.string   "phone_number",     default: "",   null: false
+    t.string   "fax_number",       default: "",   null: false
     t.text     "description"
     t.text     "google_maps_uri"
-    t.boolean  "published",       default: true, null: false
+    t.boolean  "published",        default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +86,7 @@ ActiveRecord::Schema.define(version: 20141217230040) do
     t.string   "full_path",        default: "",   null: false
     t.text     "body"
     t.text     "style"
+    t.text     "script"
     t.text     "meta_description"
     t.text     "meta_keywords"
     t.boolean  "show_in_menu",     default: true, null: false
@@ -127,11 +143,25 @@ ActiveRecord::Schema.define(version: 20141217230040) do
     t.integer  "user_id"
     t.integer  "picture_id"
     t.integer  "office_id"
-    t.string   "slug",        default: "",   null: false
-    t.string   "name"
+    t.string   "slug",                  default: "",   null: false
+    t.string   "display_name"
     t.string   "title"
-    t.text     "description"
-    t.boolean  "published",   default: true, null: false
+    t.string   "display_email_address"
+    t.string   "display_phone_number"
+    t.string   "website_uri"
+    t.string   "facebook_uri"
+    t.string   "twitter_username"
+    t.string   "linked_in_uri"
+    t.string   "active_rain_uri"
+    t.string   "youtube_uri"
+    t.string   "instagram_uri"
+    t.text     "bio_body"
+    t.text     "bio_style"
+    t.text     "bio_script"
+    t.string   "license_number"
+    t.integer  "years_of_experience"
+    t.date     "joined_at"
+    t.boolean  "published",             default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

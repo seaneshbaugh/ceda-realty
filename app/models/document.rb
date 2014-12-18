@@ -1,10 +1,10 @@
 class Document < ActiveRecord::Base
   has_attached_file :file, {
-    path: ":rails_root/public/uploads/#{Rails.env.test? ? 'test/' : ''}:class_singular/:attachment/:style_prefix:basename.:extension",
-    url: "/uploads/:class_singular/:attachment/#{Rails.env.test? ? 'test/' : ''}:style_prefix:basename.:extension" }
+    path: ":rails_root/public/uploads/#{Rails.env.test? ? 'test/' : ''}documents/:style_prefix:basename.:extension",
+    url: "/uploads/#{Rails.env.test? ? 'test/' : ''}documents/:style_prefix:basename.:extension" }
 
   validates_length_of   :name, maximum: 255
-  validates_presence_of :title
+  validates_presence_of :name
 
   validates_uniqueness_of :file_fingerprint, if: -> { !Rails.env.test? }
 
@@ -31,9 +31,6 @@ class Document < ActiveRecord::Base
 
   before_validation :modify_file_file_name
   before_validation :set_default_name
-
-  before_post_process :file?
-  after_post_process :save_file_dimensions
 
   protected
 

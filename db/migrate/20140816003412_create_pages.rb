@@ -7,6 +7,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :full_path, null: false, default: ''
       t.text :body
       t.text :style
+      t.text :script
       t.text :meta_description
       t.text :meta_keywords
       t.boolean :show_in_menu, null: false, default: true
