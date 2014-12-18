@@ -3,6 +3,8 @@ require 'email_validator'
 class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
+  rolify
+
   validates_format_of     :username, with: /\A(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])\z/, allow_blank: true
   validates_length_of     :username, within: 3..255, allow_blank: true
   validates_presence_of   :username
@@ -16,8 +18,8 @@ class User < ActiveRecord::Base
   validates_length_of       :password, within: 6..255, if: :password_required?, allow_blank: true
   validates_presence_of     :password, if: :password_required?
 
-  validates_inclusion_of :role, in: %w(read_only agent admin sysadmin)
-  validates_presence_of  :role
+  # validates_inclusion_of :role, in: %w(read_only agent admin sysadmin)
+  # validates_presence_of  :role
 
   validates_length_of   :first_name, maximum: 255
   validates_presence_of :first_name
@@ -31,7 +33,7 @@ class User < ActiveRecord::Base
 
   default_value_for :encrypted_password, ''
 
-  default_value_for :role, 'read_only'
+  # default_value_for :role, 'read_only'
 
   default_value_for :first_name, ''
 
@@ -49,15 +51,15 @@ class User < ActiveRecord::Base
     "#{self.first_name.first.upcase}. #{self.last_name}"
   end
 
-  def valid_roles
-    if self.role == 'admin'
-      ['admin', 'agent', 'read_only']
-    elsif self.role == 'sysadmin'
-      ['sysadmin', 'admin', 'agent', 'read_only']
-    else
-      []
-    end
-  end
+  # def valid_roles
+  #   if self.role == 'admin'
+  #     ['admin', 'agent', 'read_only']
+  #   elsif self.role == 'sysadmin'
+  #     ['sysadmin', 'admin', 'agent', 'read_only']
+  #   else
+  #     []
+  #   end
+  # end
 
   protected
 
@@ -66,6 +68,6 @@ class User < ActiveRecord::Base
   end
 
   def define_role
-    self.role ||= 'read_only'
+    add_role :user if roles.empty?
   end
 end
