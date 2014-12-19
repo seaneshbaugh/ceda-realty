@@ -13,6 +13,7 @@ Post.seed do |s|
 <p>Its high time for changes in our industry. The Ceda Revolution represents change from old technology, old methods of communication and old worn-out training which meet neither the needs of the modern REALTOR&reg; nor todays client culture. The Ceda Revolution equips agents for the FUTURE of Real Estate, utilzes the newest technology and above all, MAKES THE REAL ESTATE TRANSACTION A PLEASANT EXPERIENCE.</p>
 eos
   s.style = ''
+  s.script = ''
   s.meta_description = ''
   s.meta_keywords = ''
   s.published = true
@@ -32,6 +33,7 @@ Post.seed do |s|
 <iframe src="http://www.snotr.com/embed/8965" width="400" height="330" frameborder="0"></iframe>
   eos
   s.style = ''
+  s.script = ''
   s.meta_description = ''
   s.meta_keywords = ''
   s.published = true

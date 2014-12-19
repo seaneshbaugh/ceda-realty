@@ -4,6 +4,7 @@ class CreateOffices < ActiveRecord::Migration
       t.integer :picture_id
       t.integer :manager_id
       t.string :name, null: false, default: ''
+      t.string :slug, null: false, default: ''
       t.string :street_address_1, null: false, default: ''
       t.string :street_address_2, null: false, default: ''
       t.string :city, null: false, default: ''
@@ -11,7 +12,9 @@ class CreateOffices < ActiveRecord::Migration
       t.string :zipcode, null: false, default: ''
       t.string :phone_number, null: false, default: ''
       t.string :fax_number, null: false, default: ''
-      t.text :description
+      t.text :description_body
+      t.text :description_style
+      t.text :description_script
       t.text :google_maps_uri
       t.boolean :published, null: false, default: true
       t.timestamps
@@ -20,6 +23,7 @@ class CreateOffices < ActiveRecord::Migration
     change_table :offices do |t|
       t.index :picture_id
       t.index :manager_id
+      t.index :slug, unique: true
       t.index :published
     end
   end

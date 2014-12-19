@@ -1,62 +1,64 @@
 class Post < ActiveRecord::Base
-  acts_as_taggable
+  include Publishable
+  include Slugable
+
+  scope :reverse_chronological_order, -> { order('posts.created_at DESC') }
 
   belongs_to :user
+
+  validates_presence_of :user_id
 
   validates_length_of :title, maximum: 255
   validates_presence_of :title
   validates_uniqueness_of :title
 
-  validates_length_of :slug, maximum: 255
-  validates_presence_of :slug
-  validates_uniqueness_of :slug
-
   validates_length_of :body, maximum: 65535
 
   validates_length_of :style, maximum: 65535
+
+  validates_length_of :script, maximum: 65535
 
   validates_length_of :meta_description, maximum: 65535
 
   validates_length_of :meta_keywords, maximum: 65535
 
   validates_associated :user
-  validates_presence_of :user_id
 
-  before_validation :generate_slug
+  acts_as_taggable
 
-  def to_param
-    self.slug
-  end
+  default_value_for :title, ''
+
+  default_value_for :body, ''
+
+  default_value_for :style, ''
+
+  default_value_for :script, ''
+
+  default_value_for :meta_description, ''
+
+  default_value_for :meta_keywords, ''
+
+  default_value_for :published, true
 
   def more
-    if self.body.include?('<!--more-->')
-      self.body[0..self.body.index('<!--more-->') - 1]
+    if body.include?('<!--more-->')
+      body[0..body.index('<!--more-->') - 1]
     else
-      self.body
+      body
     end
   end
 
   def truncated?
-    self.body.length > self.more.length
+    body.length > more.length
   end
 
   def first_image
-    images = Nokogiri::HTML(self.body).xpath('//img')
+    images = Nokogiri::HTML(body).xpath('//img')
 
     if images.length > 0
-      images[0]['src']
+      images.first['src']
     else
       nil
-    end
-  end
-
-  protected
-
-  def generate_slug
-    if self.title.blank?
-      self.slug = self.id.to_s
-    else
-      self.slug = self.title.gsub(/'/, '').parameterize
     end
   end
 end

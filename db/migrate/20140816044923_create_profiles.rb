@@ -8,7 +8,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :display_name
       t.string :title
       t.string :display_email_address
-      t.string :display_phone_number
+      t.string :phone_number
       t.string :website_uri
       t.string :facebook_uri
       t.string :twitter_username
@@ -30,7 +30,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.index :user_id
       t.index :picture_id
       t.index :office_id
-      t.index :slug
+      t.index :slug, unique: true
       t.index :published
     end
   end

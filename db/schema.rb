@@ -60,17 +60,20 @@ ActiveRecord::Schema.define(version: 20141218111027) do
   create_table "offices", force: true do |t|
     t.integer  "picture_id"
     t.integer  "manager_id"
-    t.string   "name",             default: "",   null: false
-    t.string   "street_address_1", default: "",   null: false
-    t.string   "street_address_2", default: "",   null: false
-    t.string   "city",             default: "",   null: false
-    t.string   "state",            default: "",   null: false
-    t.string   "zipcode",          default: "",   null: false
-    t.string   "phone_number",     default: "",   null: false
-    t.string   "fax_number",       default: "",   null: false
-    t.text     "description"
+    t.string   "name",               default: "",   null: false
+    t.string   "slug",               default: "",   null: false
+    t.string   "street_address_1",   default: "",   null: false
+    t.string   "street_address_2",   default: "",   null: false
+    t.string   "city",               default: "",   null: false
+    t.string   "state",              default: "",   null: false
+    t.string   "zipcode",            default: "",   null: false
+    t.string   "phone_number",       default: "",   null: false
+    t.string   "fax_number",         default: "",   null: false
+    t.text     "description_body"
+    t.text     "description_style"
+    t.text     "description_script"
     t.text     "google_maps_uri"
-    t.boolean  "published",        default: true, null: false
+    t.boolean  "published",          default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20141218111027) do
   add_index "offices", ["manager_id"], name: "index_offices_on_manager_id", using: :btree
   add_index "offices", ["picture_id"], name: "index_offices_on_picture_id", using: :btree
   add_index "offices", ["published"], name: "index_offices_on_published", using: :btree
+  add_index "offices", ["slug"], name: "index_offices_on_slug", unique: true, using: :btree
 
   create_table "pages", force: true do |t|
     t.integer  "parent_id"
@@ -128,6 +132,7 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.string   "slug",             default: "",   null: false
     t.text     "body"
     t.text     "style"
+    t.text     "script"
     t.text     "meta_description"
     t.text     "meta_keywords"
     t.boolean  "published",        default: true, null: false
@@ -136,7 +141,7 @@ ActiveRecord::Schema.define(version: 20141218111027) do
   end
 
   add_index "posts", ["published"], name: "index_posts_on_published", using: :btree
-  add_index "posts", ["slug"], name: "index_posts_on_slug", using: :btree
+  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "profiles", force: true do |t|
@@ -147,7 +152,7 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.string   "display_name"
     t.string   "title"
     t.string   "display_email_address"
-    t.string   "display_phone_number"
+    t.string   "phone_number"
     t.string   "website_uri"
     t.string   "facebook_uri"
     t.string   "twitter_username"
@@ -169,7 +174,7 @@ ActiveRecord::Schema.define(version: 20141218111027) do
   add_index "profiles", ["office_id"], name: "index_profiles_on_office_id", using: :btree
   add_index "profiles", ["picture_id"], name: "index_profiles_on_picture_id", using: :btree
   add_index "profiles", ["published"], name: "index_profiles_on_published", using: :btree
-  add_index "profiles", ["slug"], name: "index_profiles_on_slug", using: :btree
+  add_index "profiles", ["slug"], name: "index_profiles_on_slug", unique: true, using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "roles", force: true do |t|
