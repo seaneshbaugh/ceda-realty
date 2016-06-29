@@ -44,5 +44,5 @@ Rails.application.routes.draw do
 
   root to: 'pages#index'
 
-  get '*fulL_path' => 'pages#show'
+  get '*full_path' => 'pages#show'
 end
