@@ -4,67 +4,23 @@ ruby '2.3.1'
 gem 'rails', '5.0.0.rc2'
 gem 'mysql2'
 
-gem 'acts-as-taggable-on'
-gem 'bootstrap_form'
-gem 'cancancan'
-gem 'coffee-rails'
-gem 'default_value_for'
-gem 'devise'
-gem 'exception_notification'
-gem 'figaro'
-gem 'haml-rails'
-gem 'jbuilder'
-gem 'jquery-rails'
-gem 'jquery-turbolinks'
-gem 'jquery-ui-rails'
-gem 'kaminari'
-gem 'less-rails'
-gem 'less-rails-bootstrap'
-gem 'listjs-rails'
-gem 'non-stupid-digest-assets'
-gem 'paperclip'
-gem 'rails_autolink'
-gem 'ransack'
-gem 'rmagick'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'jbuilder', '~> 2.5'
 gem 'rolify'
-gem 'sanitize'
-gem 'seed-fu'
+gem 'sass-rails', '~> 5.0'
 gem 'therubyracer'
-gem 'turbolinks'
-gem 'uglifier'
-gem 'validate_url'
-gem 'validates_timeliness'
-
-group :unicorn do
-  gem 'unicorn'
-  gem 'unicorn-worker-killer'
-end
-
-group :doc do
-  gem 'sdoc'
-end
+gem 'turbolinks', '~> 5.x'
+gem 'uglifier', '>= 1.3.0'
 
 group :development do
-  gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capistrano-ext'
-  gem 'capistrano-rails'
-  gem 'mailcatcher'
-  gem 'quiet_assets'
-  gem 'rack-mini-profiler', require: false
-  gem 'rails_best_practices'
-  gem 'rails-erd', require: false
-  gem 'rubocop', require: false
-  gem 'spring'
+  gem 'listen', '~> 3.0.5'
   gem 'thin'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do
-  gem 'database_cleaner'
-  gem 'minitest'
-  gem 'guard-minitest'
-  gem 'mini_backtrace'
-  gem 'minitest-reporters'
-  gem 'simplecov', require: false
+group :development, :test do
+  gem 'byebug'
 end
