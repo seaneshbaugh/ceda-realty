@@ -1,3 +1,25 @@
+GIT
+  remote: git://github.com/mbleigh/acts-as-taggable-on.git
+  revision: c6e2c3d0acb33097561088516d94db0948c8aac5
+  specs:
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 3.2, < 5)
+
+GIT
+  remote: git://github.com/mbleigh/seed-fu.git
+  revision: 9d393b28e1a1374b7f81205c586aec38f5c7063a
+  specs:
+    seed-fu (2.3.6)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+
+GIT
+  remote: git://github.com/tylergannon/default_value_for.git
+  revision: fac207d6f7252424dd599a7c8cc448fb8ee0960f
+  specs:
+    default_value_for (3.0.1)
+      activerecord (>= 3.2.0, < 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -38,7 +60,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (7.0.0)
+    bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -47,6 +71,10 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.5)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -58,6 +86,12 @@ GEM
     concurrent-ruby (1.0.2)
     daemons (1.2.3)
     debug_inspector (0.0.2)
+    devise (4.1.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
     erubis (2.7.0)
     eventmachine (1.2.0.1)
     execjs (2.7.0)
@@ -68,7 +102,6 @@ GEM
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
-    json (1.8.3)
     libv8 (3.16.14.15)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -81,17 +114,24 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
-    mysql2 (0.4.4)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    orm_adapter (0.5.0)
+    paperclip (5.0.0)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
+    pg (0.18.4)
     pkg-config (1.1.7)
-    rack (2.0.0.rc1)
-      json
+    rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.rc2)
@@ -125,10 +165,13 @@ GEM
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     ref (2.0.0)
+    responders (2.2.0)
+      railties (>= 4.2.0, < 5.1)
+    rmagick (2.15.4)
     rolify (5.1.0)
     sass (3.4.22)
-    sass-rails (5.0.4)
-      railties (>= 4.0.0, < 5.0)
+    sass-rails (5.0.5)
+      railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
@@ -154,13 +197,21 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    turbolinks (5.0.0.beta2)
-      turbolinks-source
-    turbolinks-source (5.0.0.beta5)
+    timeliness (0.3.8)
+    turbolinks (5.0.0)
+      turbolinks-source (~> 5)
+    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    validate_url (1.0.2)
+      activemodel (>= 3.0.0)
+      addressable
+    validates_timeliness (4.0.2)
+      timeliness (~> 0.3.7)
+    warden (1.2.6)
+      rack (>= 1.0)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -169,22 +220,30 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on!
   better_errors
   binding_of_caller
   byebug
   coffee-rails (~> 4.1.0)
+  default_value_for!
+  devise
   jbuilder (~> 2.5)
   listen (~> 3.0.5)
-  mysql2
+  paperclip
+  pg (~> 0.18)
   rails (= 5.0.0.rc2)
+  rmagick
   rolify
   sass-rails (~> 5.0)
+  seed-fu!
   spring
   spring-watcher-listen (~> 2.0.0)
   therubyracer
   thin
   turbolinks (~> 5.x)
   uglifier (>= 1.3.0)
+  validate_url
+  validates_timeliness
 
 RUBY VERSION
    ruby 2.3.1p112

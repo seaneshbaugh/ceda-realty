@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20141218111027) do
 
-  create_table "designations", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "designations", force: :cascade do |t|
     t.integer  "picture_id"
     t.string   "name",         default: "",   null: false
     t.string   "abbreviation", default: "",   null: false
@@ -21,21 +23,19 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.boolean  "published",    default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["picture_id"], name: "index_designations_on_picture_id", using: :btree
+    t.index ["published"], name: "index_designations_on_published", using: :btree
   end
 
-  add_index "designations", ["picture_id"], name: "index_designations_on_picture_id", using: :btree
-  add_index "designations", ["published"], name: "index_designations_on_published", using: :btree
-
-  create_table "designations_profiles", id: false, force: true do |t|
+  create_table "designations_profiles", id: false, force: :cascade do |t|
     t.integer "designation_id", null: false
     t.integer "profile_id",     null: false
+    t.index ["designation_id", "profile_id"], name: "index_designations_profiles_on_designation_id_and_profile_id", unique: true, using: :btree
+    t.index ["designation_id"], name: "index_designations_profiles_on_designation_id", using: :btree
+    t.index ["profile_id"], name: "index_designations_profiles_on_profile_id", using: :btree
   end
 
-  add_index "designations_profiles", ["designation_id", "profile_id"], name: "index_designations_profiles_on_designation_id_and_profile_id", unique: true, using: :btree
-  add_index "designations_profiles", ["designation_id"], name: "index_designations_profiles_on_designation_id", using: :btree
-  add_index "designations_profiles", ["profile_id"], name: "index_designations_profiles_on_profile_id", using: :btree
-
-  create_table "documents", force: true do |t|
+  create_table "documents", force: :cascade do |t|
     t.string   "name",              default: "", null: false
     t.string   "file_file_name"
     t.string   "file_content_type"
@@ -44,20 +44,18 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.string   "file_fingerprint",  default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["file_fingerprint"], name: "index_documents_on_file_fingerprint", using: :btree
   end
 
-  add_index "documents", ["file_fingerprint"], name: "index_documents_on_file_fingerprint", using: :btree
-
-  create_table "mls_names", force: true do |t|
+  create_table "mls_names", force: :cascade do |t|
     t.integer  "profile_id",              null: false
     t.string   "name",       default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["profile_id"], name: "index_mls_names_on_profile_id", using: :btree
   end
 
-  add_index "mls_names", ["profile_id"], name: "index_mls_names_on_profile_id", using: :btree
-
-  create_table "offices", force: true do |t|
+  create_table "offices", force: :cascade do |t|
     t.integer  "picture_id"
     t.integer  "manager_id"
     t.string   "name",               default: "",   null: false
@@ -76,14 +74,13 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.boolean  "published",          default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["manager_id"], name: "index_offices_on_manager_id", using: :btree
+    t.index ["picture_id"], name: "index_offices_on_picture_id", using: :btree
+    t.index ["published"], name: "index_offices_on_published", using: :btree
+    t.index ["slug"], name: "index_offices_on_slug", unique: true, using: :btree
   end
 
-  add_index "offices", ["manager_id"], name: "index_offices_on_manager_id", using: :btree
-  add_index "offices", ["picture_id"], name: "index_offices_on_picture_id", using: :btree
-  add_index "offices", ["published"], name: "index_offices_on_published", using: :btree
-  add_index "offices", ["slug"], name: "index_offices_on_slug", unique: true, using: :btree
-
-  create_table "pages", force: true do |t|
+  create_table "pages", force: :cascade do |t|
     t.integer  "parent_id"
     t.string   "title",            default: "",   null: false
     t.string   "slug",             default: "",   null: false
@@ -98,15 +95,14 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.integer  "order",            default: 0,    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["full_path"], name: "index_pages_on_full_path", unique: true, using: :btree
+    t.index ["parent_id"], name: "index_pages_on_parent_id", using: :btree
+    t.index ["published"], name: "index_pages_on_published", using: :btree
+    t.index ["show_in_menu"], name: "index_pages_on_show_in_menu", using: :btree
+    t.index ["slug"], name: "index_pages_on_slug", using: :btree
   end
 
-  add_index "pages", ["full_path"], name: "index_pages_on_full_path", unique: true, using: :btree
-  add_index "pages", ["parent_id"], name: "index_pages_on_parent_id", using: :btree
-  add_index "pages", ["published"], name: "index_pages_on_published", using: :btree
-  add_index "pages", ["show_in_menu"], name: "index_pages_on_show_in_menu", using: :btree
-  add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
-
-  create_table "pictures", force: true do |t|
+  create_table "pictures", force: :cascade do |t|
     t.string   "name",                  default: "", null: false
     t.text     "alt_text"
     t.string   "file_file_name"
@@ -122,11 +118,10 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.integer  "file_thumbnail_height", default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["file_fingerprint"], name: "index_pictures_on_file_fingerprint", using: :btree
   end
 
-  add_index "pictures", ["file_fingerprint"], name: "index_pictures_on_file_fingerprint", using: :btree
-
-  create_table "posts", force: true do |t|
+  create_table "posts", force: :cascade do |t|
     t.integer  "user_id",                         null: false
     t.string   "title",            default: "",   null: false
     t.string   "slug",             default: "",   null: false
@@ -138,13 +133,12 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.boolean  "published",        default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["published"], name: "index_posts_on_published", using: :btree
+    t.index ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
-  add_index "posts", ["published"], name: "index_posts_on_published", using: :btree
-  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
-
-  create_table "profiles", force: true do |t|
+  create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "picture_id"
     t.integer  "office_id"
@@ -169,46 +163,42 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.boolean  "published",             default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["office_id"], name: "index_profiles_on_office_id", using: :btree
+    t.index ["picture_id"], name: "index_profiles_on_picture_id", using: :btree
+    t.index ["published"], name: "index_profiles_on_published", using: :btree
+    t.index ["slug"], name: "index_profiles_on_slug", unique: true, using: :btree
+    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
-  add_index "profiles", ["office_id"], name: "index_profiles_on_office_id", using: :btree
-  add_index "profiles", ["picture_id"], name: "index_profiles_on_picture_id", using: :btree
-  add_index "profiles", ["published"], name: "index_profiles_on_published", using: :btree
-  add_index "profiles", ["slug"], name: "index_profiles_on_slug", unique: true, using: :btree
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
-
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.integer  "resource_id"
     t.string   "resource_type"
+    t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-
-  create_table "taggings", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
-    t.integer  "taggable_id"
     t.string   "taggable_type"
-    t.integer  "tagger_id"
+    t.integer  "taggable_id"
     t.string   "tagger_type"
+    t.integer  "tagger_id"
     t.string   "context",       limit: 128
     t.datetime "created_at"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
-
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -224,17 +214,15 @@ ActiveRecord::Schema.define(version: 20141218111027) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
-  create_table "users_roles", id: false, force: true do |t|
+  create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end
