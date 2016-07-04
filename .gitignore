@@ -20,3 +20,4 @@
 /.idea
 coverage/*
 public/uploads/*
+.vagrant
