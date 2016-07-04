@@ -10,6 +10,30 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require normalize
  *= require_tree .
  *= require_self
  */
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 400px;
+    width: 90%;
+}
+
+@media screen and (min-width: 640px) {
+    .container {
+        max-width: none;
+        width: 600px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .container {
+        width: 960px;
+    }
+}
