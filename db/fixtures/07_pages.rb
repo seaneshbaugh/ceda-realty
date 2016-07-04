@@ -5,6 +5,31 @@ order = 0
 Page.seed do |s|
   s.id = id
   s.parent_id = nil
+  s.title = 'Home'
+  s.slug = 'home'
+  s.full_path = '/home'
+
+  photo_grid_urls = Picture.where(name: ['Photo Grid 01', 'Photo Grid 02', 'Photo Grid 03']).map { |picture| picture.file.url }
+
+  s.body = <<-eos
+  <img src="<%= #{photo_grid_urls.inspect}.sample %>">
+eos
+  s.style = ''
+  s.script = ''
+  s.meta_description = ''
+  s.meta_keywords = ''
+  s.show_in_menu = true
+  s.published = true
+  s.order = order
+  s.is_home = true
+
+  id += 1
+  order += 1
+end
+
+Page.seed do |s|
+  s.id = id
+  s.parent_id = nil
   s.title = 'About'
   s.slug = 'about'
   s.full_path = '/about'
@@ -31,6 +56,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -53,6 +79,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -93,6 +120,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -178,6 +206,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -226,6 +255,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -276,6 +306,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -340,6 +371,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -385,6 +417,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -408,6 +441,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -430,6 +464,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -491,6 +526,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -526,6 +562,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1
@@ -580,6 +617,7 @@ eos
   s.show_in_menu = true
   s.published = true
   s.order = order
+  s.is_home = false
 
   id += 1
   order += 1

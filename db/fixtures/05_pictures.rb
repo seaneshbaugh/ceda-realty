@@ -28,7 +28,10 @@ pictures = [
   { fixture_filename: 'designations/sior.png', original_filename: '1418924983107800.png', name: 'Society of Industrial and Office Realtors', alt_text: '' },
   { fixture_filename: 'designations/sres.png', original_filename: '1418924983779637.png', name: 'Seniors Real Estate Specialist', alt_text: '' },
   { fixture_filename: 'designations/tahs.png', original_filename: '1418924983888842.png', name: 'Texas Affordable Housing Specialist', alt_text: '' },
-  { fixture_filename: 'designations/trc.png', original_filename: '1418924984201702.png', name: 'Transnational Referral Certification', alt_text: '' }
+  { fixture_filename: 'designations/trc.png', original_filename: '1418924984201702.png', name: 'Transnational Referral Certification', alt_text: '' },
+  { fixture_filename: 'pages/photo-grid-01.jpg', original_filename: '1467623080298441.jpg', name: 'Photo Grid 01', alt_text: '' },
+  { fixture_filename: 'pages/photo-grid-02.jpg', original_filename: '1467623130276671.jpg', name: 'Photo Grid 02', alt_text: '' },
+  { fixture_filename: 'pages/photo-grid-03.jpg', original_filename: '1467623141883969.jpg', name: 'Photo Grid 03', alt_text: '' }
 ]
 
 fixture_file_directory = Rails.root.join('db', 'fixtures', 'files', 'images')
@@ -42,12 +45,10 @@ pictures.each_with_index do |picture, id|
 
   original_file_path = File.join(output_directory, picture[:original_filename])
 
-  # medium_filename = "#{File.basename(picture[:original_filename], '.*')}-medium#{File.extname(picture[:original_filename])}"
   medium_filename = "medium_#{picture[:original_filename]}"
 
   medium_file_path = File.join(output_directory, medium_filename)
 
-  # thumbnail_filename = "#{File.basename(picture[:original_filename], '.*')}-thumbnail#{File.extname(picture[:original_filename])}"
   thumbnail_filename = "thumbnail_#{picture[:original_filename]}"
 
   thumbnail_file_path = File.join(output_directory, thumbnail_filename)
