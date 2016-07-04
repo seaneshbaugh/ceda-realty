@@ -21,6 +21,7 @@ gem 'turbolinks', '~> 5.x'
 gem 'uglifier', '>= 1.3.0'
 gem 'validate_url'
 gem 'validates_timeliness'
+gem 'vanilla-ujs'
 
 group :development do
   gem 'better_errors'
