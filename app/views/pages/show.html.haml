@@ -1,0 +1,2 @@
+.page{ id: "page-#{@page.slug}" }
+  = ERB.new(@page.body).result(binding).html_safe

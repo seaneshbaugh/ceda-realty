@@ -47,6 +47,16 @@ class Page < ActiveRecord::Base
 
   default_value_for :order, 0
 
+  resourcify
+
+  before_save do |page|
+    if page.is_home?
+      Page.where.not(id: page.id).each do |other_page|
+        other_page.update_attribute(:is_home, false)
+      end
+    end
+  end
+
   protected
 
   def generate_full_path

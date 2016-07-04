@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218111027) do
+ActiveRecord::Schema.define(version: 20160704072818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,20 +82,22 @@ ActiveRecord::Schema.define(version: 20141218111027) do
 
   create_table "pages", force: :cascade do |t|
     t.integer  "parent_id"
-    t.string   "title",            default: "",   null: false
-    t.string   "slug",             default: "",   null: false
-    t.string   "full_path",        default: "",   null: false
+    t.string   "title",            default: "",    null: false
+    t.string   "slug",             default: "",    null: false
+    t.string   "full_path",        default: "",    null: false
     t.text     "body"
     t.text     "style"
     t.text     "script"
     t.text     "meta_description"
     t.text     "meta_keywords"
-    t.boolean  "show_in_menu",     default: true, null: false
-    t.boolean  "published",        default: true, null: false
-    t.integer  "order",            default: 0,    null: false
+    t.boolean  "show_in_menu",     default: true,  null: false
+    t.boolean  "published",        default: true,  null: false
+    t.integer  "order",            default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_home",          default: false, null: false
     t.index ["full_path"], name: "index_pages_on_full_path", unique: true, using: :btree
+    t.index ["is_home"], name: "index_pages_on_is_home", using: :btree
     t.index ["parent_id"], name: "index_pages_on_parent_id", using: :btree
     t.index ["published"], name: "index_pages_on_published", using: :btree
     t.index ["show_in_menu"], name: "index_pages_on_show_in_menu", using: :btree
