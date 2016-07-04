@@ -1,0 +1,13 @@
+!!!
+%html{ dir: 'ltr', lang: 'en-US' }
+  %head
+    %meta{ charset: 'utf-8' }
+    %title= page_title(yield(:page_title))
+    %meta{ content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport' }
+    %meta{ content: page_meta_description(yield(:meta_description)), name: 'description' }
+    %meta{ content: 'CEDA Realty', name: 'author' }
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    = csrf_meta_tag
+  %body
+    = yield
