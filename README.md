@@ -38,4 +38,4 @@ Seed the database.
 
 To run the test suite, after installing the gems, run the following command:
 
-    $ rspec
+    $ rake test
